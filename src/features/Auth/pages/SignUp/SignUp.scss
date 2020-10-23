@@ -1,0 +1,17 @@
+.SignUp{
+    position: absolute;
+
+}
+
+.BackgroundImage > img{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+.SignUpForm{
+    width: 500px;
+    box-sizing: border-box;
+    display: flex;
+    transform: translate(50%,50%);
+}
