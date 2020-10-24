@@ -62,6 +62,15 @@
                     color: white;
                 }
             }
+            .ForgotPassword{
+                color: black;
+                text-align: right;
+                text-decoration: none;
+                &:hover{
+                    color: #1c9dea;
+                    text-decoration: underline;
+                }
+            }
         }
 
         .SignIn__MediaLogo{

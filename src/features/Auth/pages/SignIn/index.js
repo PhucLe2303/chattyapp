@@ -1,6 +1,5 @@
 import React, { useState } from "react";
-import { useForm, Controller, FormProvider} from "react-hook-form";
-// import {Link} from "react-router-dom";
+import { useForm, FormProvider} from "react-hook-form";
 import {
   Button,
   IconButton,
@@ -13,6 +12,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from "yup";
 import {auth} from 'services/firebaseConfig';
 import InputField from "custom-fields/InputField";
+import { Link } from "react-router-dom";
 
 const SignInSchema= yup.object().shape({
   email:yup.string().email('Email is not valid.').required('Email is required.'),
@@ -29,18 +29,22 @@ function SignIn() {
   });
   const {handleSubmit} = methods;
 
-  // const [showPassword, setShowPassword] = useState(false);
-
   const [loading,setLoading] = useState(false);
 
   const onSubmit = (data) => {
       console.log(data);
       setLoading(true);
-      // auth.createUserWithEmailAndPassword(data.email,data.password).catch((err)=>{
-      //   setLoading(false);
-      //   console.log(err);
-      // })
+      auth.createUserWithEmailAndPassword(data.email,data.password).then(()=>{
+        setLoading(false);
+      }).catch((err)=>{
+        setLoading(false);
+        console.log(err);
+      })
   };
+
+  const handleClickForgotPassword=()=>{
+    console.log('click forgot password');
+  }
 
   return (
     <>
@@ -60,9 +64,13 @@ function SignIn() {
             <InputField name="email" label="Email"/>
             
             <InputField name="password" label="PassWord" type="password"/>
-            {/* <Link to="/forgotpassword">
+            <Link 
+              to="/forgotpassword" 
+              className="ForgotPassword"
+              onClick={handleClickForgotPassword}
+              >
                 Forgot Password?
-            </Link> */}
+            </Link>
             <Button
               variant="contained"
               color="primary"
@@ -73,6 +81,13 @@ function SignIn() {
             >
               {loading? <CircularProgress size={25.75} className="Circular"/>:"Login"}
             </Button>
+            <span>{"Don't have an account?  "}
+            <Link 
+              to="/signup" 
+              className="ForgotPassword"
+              >
+              Register now!
+            </Link></span>
           </form>
           </FormProvider>
          
