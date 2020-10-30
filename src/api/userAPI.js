@@ -1,5 +1,5 @@
 import { auth, db } from "services/firebaseConfig";
-import firebase from 'firebase';
+import firebase from "firebase";
 
 const userAPI = {
   signInWithEmail: (email, password) => {
@@ -53,7 +53,7 @@ const userAPI = {
 
   signInWithGoogle: () => {
     return new Promise((resolve, reject) => {
-        var provider = new firebase.auth.GoogleAuthProvider();
+      var provider = new firebase.auth.GoogleAuthProvider();
       auth
         .signInWithPopup(provider)
         .then(function (result) {
@@ -62,9 +62,9 @@ const userAPI = {
           // The signed-in user info.
           var user = result.user;
           resolve({
-              uid:user.uid,
-              token:token,
-          })
+            uid: user.uid,
+            token: token,
+          });
           console.log(user);
         })
         .catch(function (error) {
@@ -72,46 +72,53 @@ const userAPI = {
           var errorMessage = error.message;
           // The email of the user's account used.
           reject({
-              type:'error',
-              message:errorMessage,
+            type: "error",
+            message: errorMessage,
           });
         });
     });
   },
 
-  signInWithFacebook:()=>{
-    return new Promise((resolve,reject)=>{
+  signInWithFacebook: () => {
+    return new Promise((resolve, reject) => {
       const provider = new firebase.auth.FacebookAuthProvider();
-      auth.signInWithPopup(provider).then(function(result) {
-        // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-        var token = result.credential.accessToken;
-        // The signed-in user info.
-        var user = result.user;
-        console.log(user.photoURL);
-        resolve({
-          uid:user.uid,
-          token:token,
+      auth
+        .signInWithPopup(provider)
+        .then(function (result) {
+          // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+          var token = result.credential.accessToken;
+          // The signed-in user info.
+          var user = result.user;
+          console.log(user.photoURL);
+          resolve({
+            uid: user.uid,
+            token: token,
+          });
+        })
+        .catch(function (error) {
+          var errorMessage = error.message;
+          reject({
+            type: "error",
+            message: errorMessage,
+          });
         });
-      }).catch(function(error) {
-        var errorMessage = error.message;
-        reject({
-          type:'error',
-          message:errorMessage,
-        });
-      });
     });
   },
 
-  resetPassword:(password)=>{
-      return new Promise((resolve,reject)=>{
-        const user = auth.currentUser;
-        user.updatePassword(password).then(()=>{
-
-            resolve(true);
-        }).catch((error)=>{
-            reject(error);
+  resetPassword: (email) => {
+    return new Promise((resolve, reject) => {
+      auth
+        .sendPasswordResetEmail(email)
+        .then(() => {
+          resolve(true);
+        })
+        .catch((error) => {
+          reject({
+            type: "error",
+            message: error.message,
+          });
         });
-      });
+    });
   },
 
   signOut: () => {

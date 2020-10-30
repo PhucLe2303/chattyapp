@@ -6,7 +6,7 @@ import "./App.css";
 import NotFound from 'components/NotFound';
 const SignIn = lazy(() => import("./features/Auth/pages/SignIn"));
 const SignUp = lazy(() => import("./features/Auth/pages/SignUp"));
-const ForgotPassword = lazy(()=>import("./features/Auth/pages/ForgotPassword"));
+const ResetPassword = lazy(()=>import("./features/Auth/pages/ResetPassword"));
 const MainPage = lazy(() => import("./features/Message/pages/Main"));
 
 
@@ -19,7 +19,7 @@ function App() {
             <PrivateRoute exact path="/" component={MainPage}></PrivateRoute>
             <Route exact path="/signin" component={SignIn} />
             <Route exact path="/signup" component={SignUp} />
-            <Route exact path="/resetpassword" component={ForgotPassword}/>
+            <Route exact path="/resetpassword" component={ResetPassword}/>
             <Route component={NotFound}/>
           </Switch>
         </Suspense>
