@@ -20,13 +20,13 @@ InputField.propTypes = {
   className: PropTypes.string,
   placeholder: PropTypes.string,
   disabled: PropTypes.bool,
-  labelWidth: PropTypes.string,
+  labelwidth: PropTypes.number,
   value: PropTypes.string,
   autoFocus: PropTypes.bool,
   autoComplete: PropTypes.string,
   variant: PropTypes.string,
   margin: PropTypes.string,
-  fullWidth:PropTypes.bool,
+  fullWidth: PropTypes.bool,
 };
 
 InputField.defaultProps = {
@@ -38,8 +38,8 @@ InputField.defaultProps = {
   margin: "normal",
   defaultValue: "",
   variant: "outlined",
-  fullWidth:true,
-  labelWidth:135,
+  fullWidth: true,
+  labelwidth: 75,
 };
 
 function InputField(props) {
@@ -59,7 +59,7 @@ function InputField(props) {
     className,
     defaultValue,
     fullWidth,
-    labelWidth,
+    labelwidth,
     ...other
   } = props;
   const methods = useFormContext();
@@ -88,9 +88,9 @@ function InputField(props) {
                   </IconButton>
                 </InputAdornment>
               }
-              labelWidth={70}
+              labelWidth={labelwidth}
             />
-            <FormHelperText error={Boolean(methods.errors.[name])}>
+            <FormHelperText error={Boolean(methods.errors[name])}>
               {methods.errors[name] ? methods.errors[name].message : ""}
             </FormHelperText>
           </FormControl>
@@ -99,9 +99,6 @@ function InputField(props) {
         control={methods.control}
         name={name}
         error={Boolean(methods.errors[name])}
-        defaultValue={defaultValue}
-        fullWidth={fullWidth}
-        labelWidth={labelWidth}
         {...props}
         {...other}
       />

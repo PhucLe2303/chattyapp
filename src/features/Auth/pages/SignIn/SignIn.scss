@@ -1,13 +1,14 @@
 .SignIn{
     display: flex;
-    box-sizing: border-box;
     justify-content: center;
-    height: 100vh;
     
     .SignIn__Container{
         background-color: #fff;
-        height: 600px;
-        width: 100%;
+        box-sizing: border-box;
+        box-shadow: 0 5px 10px rgba(0,0,0,.1);
+        height: 100%;
+        width: 500px;
+        padding: 34px;
         margin-top: 5%;
         border-radius: 10px;
         z-index: 1;
@@ -40,15 +41,11 @@
        
         .SignIn__Form{
             margin-top: 5%;
-            // width: 500px;
             display: flex;
             flex-direction: column;
-            padding-left: 40px;
-            padding-right: 40px;
 
             .SignIn__Input{
                 margin-top: 20px;
-                // margin-bottom: 20px;
             }
             .SignIn__Button{
                 width: 100%;
@@ -63,11 +60,10 @@
                 }
             }
             .ForgotPassword{
-                color: black;
+                color:#7289da;
                 text-align: right;
                 text-decoration: none;
                 &:hover{
-                    color: #1c9dea;
                     text-decoration: underline;
                 }
             }
@@ -77,7 +73,7 @@
             list-style: none;
             font-size: 20px;
             margin: 0;
-            margin-left: -3%;
+            transform: translateX(-70px);
             position: absolute;
             padding-left: 0;
             top: 40%;
@@ -100,6 +96,12 @@
                 color: #fff;
             }
         }
+
+        .needAccount{
+            display: block;
+            margin-top: 5px;
+            color: #72767d;
+        }
     }
     .errormessage{
         margin: 0;
@@ -107,32 +109,29 @@
 }
 
 
-
-@media screen and (max-width: 800px) {
-    .SignIn .SignIn__Container {
-      width: 100%; /* The width is 100%, when the viewport is 800px or smaller */
+@media screen and (min-width: 600px) {
+    .bg-svg{
+        background-image:url(../../../../assets/images/background.svg);
+        position: absolute;
+        min-width: 100%;
+        min-height: 100%;
+        background-size: cover;
+        background-attachment: fixed;
+        background-repeat: no-repeat;
+        background-position: center; 
     }
-  }
-
-@media screen and (max-width: 1500px) {
-    .SignIn .SignIn__Container {
-      width:500px; /* The width is 100%, when the viewport is */
-    }
-  }
-
-.BackgroundImage > img{
-    position: absolute;
-    height: 100%;
-    width: 100%;
 }
 
+@media screen and (max-width: 600px) {
 
-// .MuiFormLabel-root.Mui-focused {
-//     color: #81b0d7 !important;
-// }
+    .SignIn{
+        .SignIn__Container{
+            width: 100%;
+        }
+    }
+    .bg-svg{
+       display: none;
+    }
 
-// .MuiOutlinedInput-root.Mui-focused .MuiOutlinedInput-notchedOutline{
-//     border-color:#81b0d7 !important;
-// }
-
-
+   
+}

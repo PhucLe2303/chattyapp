@@ -1,11 +1,15 @@
 import React, { useState } from "react";
-import background from "assets/images/Background.svg";
 import "./SignUp.scss";
 import InputField from "custom-fields/InputField";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { FormProvider, useForm } from "react-hook-form";
 import { Button, CircularProgress, Container, Grid } from "@material-ui/core";
+import logo from "assets/images/iconchat.png";
+import { Link, useHistory } from "react-router-dom";
+import userAPI from "api/userAPI";
+import { useDispatch } from "react-redux";
+import { setNotification } from "app/notificationSlice";
 
 const SignInSchema = yup.object().shape({
   email: yup
@@ -30,20 +34,45 @@ const SignUp = () => {
   });
   const { handleSubmit } = methods;
   const [loading, setLoading] = useState(false);
+  const dispatch = useDispatch();
+  const history = useHistory();
 
   const onSubmit = (value) => {
-    console.log(value);
+    setLoading(true);
+    userAPI
+      .signUpWithEmail(value.email, value.password)
+      .then((value) => {
+        setLoading(false);
+        dispatch(
+          setNotification({
+            type: "success",
+            message: "Sign up is success. Please verify your email to login",
+          })
+        );
+        history.push("./signin");
+      })
+      .catch((err) => {
+        setLoading(false);
+        dispatch(
+          setNotification({
+            type: "error",
+            message: err.message,
+          })
+        );
+      });
   };
 
   return (
     <>
-      <div className="BackgroundImage">
-        <img src={background} alt="background" />
-      </div>
-      <div className="SignUp">
-        <Container className="SignUpContainer">
+      <div className="SignUp bg-svg">
+        <Container className="SignUp__Container">
+          <div className="SignUp__Header">
+            <img src={logo} alt="logo chat" />
+            <h3>Hello Everyone , We are Chatty</h3>
+            <h4>Wellcome to chatty, please signup your account.</h4>
+          </div>
           <FormProvider {...methods}>
-            <form onSubmit={handleSubmit(onSubmit)} className="SignUpForm">
+            <form onSubmit={handleSubmit(onSubmit)} className="SignUp__Form">
               <Grid container>
                 <Grid container spacing={1}>
                   <Grid item xs={6}>
@@ -68,7 +97,7 @@ const SignUp = () => {
                     name="confirmPassword"
                     type="password"
                     label="Confirm Password"
-                    // labelWidth={175}
+                    labelwidth={135}
                   />
                 </Grid>
               </Grid>
@@ -77,7 +106,7 @@ const SignUp = () => {
                   variant="contained"
                   color="primary"
                   size="large"
-                  className=""
+                  className="SignUp__btnSubmit"
                   type="submit"
                   fullWidth
                   onClick={() => setLoading(true)}
@@ -88,6 +117,12 @@ const SignUp = () => {
                     "Login"
                   )}
                 </Button>
+              </Grid>
+              <Grid className="haveAccount">
+                {"Already have an account?  "}
+                <Link to="/signin" className="linktoSignin">
+                  Sign in now!
+                </Link>
               </Grid>
             </form>
           </FormProvider>
