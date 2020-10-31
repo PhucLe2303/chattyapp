@@ -82,26 +82,55 @@ const userAPI = {
   signInWithFacebook: () => {
     return new Promise((resolve, reject) => {
       const provider = new firebase.auth.FacebookAuthProvider();
-      auth
-        .signInWithPopup(provider)
-        .then(function (result) {
-          // This gives you a Facebook Access Token. You can use it to access the Facebook API.
-          var token = result.credential.accessToken;
-          // The signed-in user info.
-          var user = result.user;
-          console.log(user.photoURL);
-          resolve({
-            uid: user.uid,
-            token: token,
+      if (
+        /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          navigator.userAgent
+        )
+      ) {
+        //mobile
+        auth.signInWithRedirect(provider);
+        auth
+          .getRedirectResult()
+          .then(function (result) {
+            if (result.credential) {
+              // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+              var token = result.credential.accessToken;
+            }
+            var user = result.user;
+            resolve({
+              uid: user.uid,
+              token: token,
+            });
+          })
+          .catch(function (error) {
+            var errorMessage = error.message;
+            reject({
+              type: "error",
+              message: errorMessage,
+            });
           });
-        })
-        .catch(function (error) {
-          var errorMessage = error.message;
-          reject({
-            type: "error",
-            message: errorMessage,
+      } else {
+        //desktop
+        auth
+          .signInWithPopup(provider)
+          .then(function (result) {
+            // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+            var token = result.credential.accessToken;
+            // The signed-in user info.
+            var user = result.user;
+            resolve({
+              uid: user.uid,
+              token: token,
+            });
+          })
+          .catch(function (error) {
+            var errorMessage = error.message;
+            reject({
+              type: "error",
+              message: errorMessage,
+            });
           });
-        });
+      }
     });
   },
 

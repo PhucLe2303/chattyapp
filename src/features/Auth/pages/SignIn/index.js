@@ -97,7 +97,7 @@ function SignIn() {
           <div className="SignIn__Header">
             <img src={logo} alt="logo chat" />
             <h3>Hello Everyone , We are Chatty</h3>
-            <h4>Wellcome to chatty please, login to your account.</h4>
+            <h4>Wellcome to chatty, please login to your account.</h4>
           </div>
           <FormProvider {...methods}>
             <form onSubmit={handleSubmit(onSubmit)} className="SignIn__Form">
