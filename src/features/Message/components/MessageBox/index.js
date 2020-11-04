@@ -1,6 +1,6 @@
 import React from "react";
 import ContactBar from "./components/ContactBar";
-import FieldInputChat from "./components/FieldInputChat";
+import FooterBox from "./components/FooterMessageBox";
 import './style.scss';
 
 function MessageBox(props) {
@@ -50,7 +50,7 @@ function MessageBox(props) {
             <p>--------------------------dong cuoi---------------------------------</p>
         </div>
         <div className="MessageBox__Footer">
-          <FieldInputChat/>
+          <FooterBox/>
         </div>
       </div>
   );

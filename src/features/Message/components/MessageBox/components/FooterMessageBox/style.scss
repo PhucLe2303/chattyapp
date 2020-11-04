@@ -1,0 +1,22 @@
+.FooterBox__Container{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .btn-color{
+        color: #1c9dea;
+
+    }
+
+
+    .Form{
+        flex: 1 1 auto;
+            .MuiOutlinedInput-root{
+                border-radius: 30px ;
+                min-height: 40px;
+             }
+    }
+    
+}
