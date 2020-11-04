@@ -1,37 +1,70 @@
-import { Button } from "@material-ui/core";
-import React from "react";
-import useMedia from "utils/mediaQuery";
+import { Grid } from "@material-ui/core";
+import React, { useState } from "react";
+// import useMedia from "utils/mediaQuery";
 import userAPI from "api/userAPI";
 import { removeCurrentUser } from "app/userSlice";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import MainNav from "features/Message/components/MainNav";
+import MessageBox from "features/Message/components/MessageBox";
+import "./style.scss";
+import LeftSideBar from "features/Message/components/LeftSideBar";
 
 const MainPage = () => {
-  const media = useMedia();
+  // const media = useMedia();
   const dispatch = useDispatch();
   const history = useHistory();
-  if (media.isDesktop) console.log("desktop");
-  else if (media.isMobile) console.log("mobile");
-  else if (media.isTablet) console.log("taplet");
-  else console.log("unknow");
+  const [openNav,setOpenNav] = useState(false);
+
+  const handleOpenNav=(openNav)=>{
+    setOpenNav(openNav);
+  }
+
   const handleClickSignOut = () => {
     userAPI
       .signOut()
       .then(() => {
         dispatch(removeCurrentUser());
-        history.push('/signin');
+        history.push("/signin");
       })
       .catch((err) => {
         console.log(err);
       });
   };
+
   return (
-    <div>
-      <p>xin chao mung den voi chatty</p>
-      <Button color="primary" onClick={handleClickSignOut}>
-        Sign Out
-      </Button>
-    </div>
+    <>
+      <Grid
+      container
+      wrap="nowrap"
+      direction="row"
+      className="Main"
+      >
+        <Grid item sx="true" className="MainNav">
+          <MainNav
+           isOpen={openNav} 
+           isClose={handleOpenNav}
+           clickSignOut={handleClickSignOut}
+           />
+        </Grid>
+        <Grid
+          item
+          sx={3}
+          className="Main__LeftSideBar"
+        >
+          <div className="Main__Container">
+            <LeftSideBar clickOpenNavBtn={handleOpenNav}/>
+          </div>
+        </Grid>
+        <Grid
+          item
+          sx={9}
+          className="Main__MessageBox"
+        >
+          <MessageBox />
+        </Grid>
+      </Grid>
+    </>
   );
 };
 

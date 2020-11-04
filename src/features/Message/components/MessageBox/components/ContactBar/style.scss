@@ -1,0 +1,35 @@
+.ContactBar {
+  background-color: #1c9dea;
+  overflow: hidden;
+  padding: 8px;
+
+  .ListBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    ul{
+        list-style: none;
+        li{
+            margin-right: 12px;
+        }
+    }
+    .ContactBar__Avatar {
+        margin-left: 12px;
+        width: 60px;
+    }
+    .ContactBar__Menu {
+      margin: 0;
+      display: flex;
+      .ContactBar__Call {
+       
+      }
+      .ContactBar__VideoCall {
+       
+      }
+      .ContactBar__Info {
+       
+      }
+    }
+  }
+}

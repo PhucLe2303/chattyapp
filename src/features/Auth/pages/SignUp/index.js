@@ -114,7 +114,7 @@ const SignUp = () => {
                   {loading ? (
                     <CircularProgress size={25.75} className="Circular" />
                   ) : (
-                    "Login"
+                    "Sign Up"
                   )}
                 </Button>
               </Grid>
@@ -126,6 +126,14 @@ const SignUp = () => {
               </Grid>
             </form>
           </FormProvider>
+          <div className="Signup__termscondition">
+            <h4>
+              <span className="dot">*</span>
+              Terms and condition
+              <span className="and"> & </span>
+              Privacy policy
+            </h4>
+          </div>
         </Container>
       </div>
     </>

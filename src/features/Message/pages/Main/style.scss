@@ -1,0 +1,21 @@
+.Main{
+   height: 100vh;
+   overflow: hidden;
+    .Main__LeftSideBar{
+
+        .Main__Container{
+            min-width: 300px;
+           
+        }
+    }
+
+    .Main__MessageBox{
+        width: 100%;
+        .MessageBox{
+            min-width: 0;
+            width: 100%;
+           
+        }
+    }
+}
+

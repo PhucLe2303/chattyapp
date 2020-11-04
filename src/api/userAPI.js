@@ -1,4 +1,4 @@
-import { auth, db } from "services/firebaseConfig";
+import { auth } from "services/firebaseConfig";
 import firebase from "firebase";
 
 const userAPI = {
@@ -35,7 +35,7 @@ const userAPI = {
 
   signUpWithEmail: (email, password) => {
     return new Promise((resolve, reject) => {
-      const unsubribe = auth
+      auth
         .createUserWithEmailAndPassword(email, password)
         .then((res) => {
           const user = res.user;
@@ -46,7 +46,6 @@ const userAPI = {
         })
         .catch((error) => {
           reject(error);
-          unsubribe();
         });
     });
   },

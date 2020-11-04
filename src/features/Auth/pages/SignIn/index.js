@@ -41,6 +41,10 @@ function SignIn() {
         picture:null,
         ...user,
       }));
+      dispatch(setNotification({
+        type:"success",
+        message:"Sign in is Success",
+      }));
       history.push('/');
       setLoading(false);
     }).catch((err)=>{
@@ -63,6 +67,10 @@ function SignIn() {
         picture:null,
         ...user,
       }));
+      dispatch(setNotification({
+        type:"success",
+        message:"Sign in is Success",
+      }));
       history.push('/');
     }).catch((err)=>{
       dispatch(setNotification({
@@ -79,7 +87,10 @@ function SignIn() {
         picture:null,
         ...user,
       }));
-      console.log(user);
+      dispatch(setNotification({
+        type:"success",
+        message:"Sign in is Success",
+      }));
       history.push('/');
     }).catch((err)=>{
       dispatch(setNotification({
@@ -146,6 +157,23 @@ function SignIn() {
               </IconButton>
             </li>
           </ul>
+          <div className="SignIn__MediaLogo__container--bottom">
+            <div className="SignIn__Sep">
+              <div className="Or">OR Connect with</div>
+            </div>
+          <ul className="SignIn__MediaLogo__content--bottom">
+          <li>
+              <IconButton className="SignIn__IconButton--fb" color="primary" onClick={handleClickSignInWithFacebook}>
+                <i className="fab fa-facebook-f"></i>
+              </IconButton>
+            </li>
+            <li>
+              <IconButton className="SignIn__IconButton--gg" color="primary" onClick={handleClickSignInWithGoogle}>
+                <i className="fab fa-google"></i>
+              </IconButton>
+            </li>
+          </ul>
+          </div>
         </div>
       </div>
     </>
