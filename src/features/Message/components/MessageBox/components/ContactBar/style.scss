@@ -1,13 +1,14 @@
 .ContactBar {
   background-color: #1c9dea;
   overflow: hidden;
-  padding: 8px;
+  height: 60px;
 
   .ListBar {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    height: 100%;
     ul{
         list-style: none;
         li{

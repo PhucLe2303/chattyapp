@@ -1,4 +1,4 @@
-import { Avatar, IconButton } from "@material-ui/core";
+import { Avatar, IconButton, Tooltip } from "@material-ui/core";
 import CallIcon from "@material-ui/icons/Call";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import InfoIcon from "@material-ui/icons/Info";
@@ -15,17 +15,23 @@ function ContactBar(props) {
         <ul className="ContactBar__Menu">
           <li className="ContactBar__Call">
             <IconButton>
-              <CallIcon />
+              <Tooltip title="Call">
+                <CallIcon />
+              </Tooltip>
             </IconButton>
           </li>
           <li className="ContactBar__VideoCall">
             <IconButton>
-              <VideoCallIcon />
+              <Tooltip title="Chat video">
+                <VideoCallIcon />
+              </Tooltip>
             </IconButton>
           </li>
           <li className="ContactBar__Info">
             <IconButton>
-              <InfoIcon />
+              <Tooltip title="More infor">
+                <InfoIcon />
+              </Tooltip>
             </IconButton>
           </li>
         </ul>

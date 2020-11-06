@@ -38,21 +38,21 @@ function MainNav(props) {
             <li>
               <Tooltip title="Messages" placement="right-end">
                 <IconButton className="Btn">
-                  <span className="fas fa-comment-dots" />
+                  <span className="fas fa-comment-dots icon" />
                 </IconButton>
               </Tooltip>
             </li>
             <li>
               <Tooltip title="Friends" placement="right-end">
                 <IconButton className="Btn">
-                  <span className="fas fa-user-friends" />
+                  <span className="fas fa-user-friends icon" />
                 </IconButton>
               </Tooltip>
             </li>
             <li>
               <Tooltip title="Nocification" placement="right-end">
                 <IconButton className="Btn">
-                  <span className="fas fa-bell" />
+                  <span className="fas fa-bell icon" />
                 </IconButton>
               </Tooltip>
             </li>
@@ -63,14 +63,14 @@ function MainNav(props) {
             <li>
               <Tooltip title="Setting" placement="right-end">
                 <IconButton className="Btn">
-                  <span className="fas fa-cog Btn--Setting" />
+                  <span className="fas fa-cog Btn--Setting icon" />
                 </IconButton>
               </Tooltip>
             </li>
             <li>
               <Tooltip title="Theme mode" placement="right-end">
                 <IconButton className="Btn">
-                  <span className="fas fa-moon" />
+                  <span className="fas fa-moon icon" />
                 </IconButton>
               </Tooltip>
             </li>
@@ -80,7 +80,7 @@ function MainNav(props) {
                 onClick={handleClickSignOut}
                 className="Btn"
                 >
-                  <span className="fas fa-sign-out-alt" />
+                  <span className="fas fa-sign-out-alt icon" />
                 </IconButton>
               </Tooltip>
             </li>

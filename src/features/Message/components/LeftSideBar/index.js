@@ -14,71 +14,28 @@ function LeftSideBar(props) {
       <div className="LeftSideBar__Content">
         <div className="LeftSideBar__Header">
           <div className="LeftSideBar__Avatar">
-            <Avatar alt="Remy Sharp">P</Avatar>
-            <h2>Chatty</h2>
+            <Avatar></Avatar>
           </div>
+          <h2>Chatty</h2>
+          <div style={{flex:"1 1 auto"}}></div>
           <div className="LeftSideBar__ShowNav_btn">
             <IconButton onClick={handleClickShowNavButton} className="Btn">
               <span className="fas fa-grip-vertical" />
             </IconButton>
           </div>
         </div>
-        <div className="LeftSideBar__Seach">
+        <div className="LeftSideBar__SeachContent">
           <InputBase
             placeholder="Search in Chatty"
             inputProps={{ "aria-label": "search google maps" }}
-          />
-          <IconButton type="submit" aria-label="search" className="Btn">
-            <SearchIcon />
-          </IconButton>
+            className="LeftSideBar__Input"
+            startAdornment={
+              <SearchIcon/>}
+          >
+          </InputBase>
         </div>
         <div className="LeftSideBar__Body" id="scrollbar">
-          <ul className="LeftSideBar__ListContact">
-            <li>
-              <Avatar alt="Remy Sharp">P</Avatar>
-              <h1>Chatty</h1>
-            </li>
-            <li>
-              <Avatar alt="Remy Sharp">P</Avatar>
-              <h1>Chatty</h1>
-            </li>
-            <li>
-              <Avatar alt="Remy Sharp">P</Avatar>
-              <h1>Chatty</h1>
-            </li>
-            <li>
-              <Avatar alt="Remy Sharp">P</Avatar>
-              <h1>Chatty</h1>
-            </li>
-            <li>
-              <Avatar alt="Remy Sharp">P</Avatar>
-              <h1>Chatty</h1>
-            </li>
-            <li>
-              <Avatar alt="Remy Sharp">P</Avatar>
-              <h1>Chatty</h1>
-            </li>
-            <li>
-              <Avatar alt="Remy Sharp">P</Avatar>
-              <h1>Chatty</h1>
-            </li>
-            <li>
-              <Avatar alt="Remy Sharp">P</Avatar>
-              <h1>Chatty</h1>
-            </li>
-            <li>
-              <Avatar alt="Remy Sharp">P</Avatar>
-              <h1>Chatty</h1>
-            </li>
-            <li>
-              <Avatar alt="Remy Sharp">P</Avatar>
-              <h1>Chatty</h1>
-            </li>
-            <li>
-              <Avatar alt="Remy Sharp">P</Avatar>
-              <h1>Cuoi</h1>
-            </li>
-          </ul>
+         
         </div>
       </div>
     </div>
