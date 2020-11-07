@@ -49,7 +49,7 @@ const MainPage = () => {
         </Grid>
         <Grid
           item
-          sx={3}
+          sx={4}
           className="Main__LeftSideBar"
         >
           <div className="Main__Container">
@@ -58,7 +58,7 @@ const MainPage = () => {
         </Grid>
         <Grid
           item
-          sx={9}
+          sx={8}
           className="Main__MessageBox"
         >
           <MessageBox />

@@ -1,6 +1,7 @@
 import { Avatar, IconButton, InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
 import React from "react";
+import ContactList from './components/ContactList';
 import "./style.scss";
 
 function LeftSideBar(props) {
@@ -35,7 +36,7 @@ function LeftSideBar(props) {
           </InputBase>
         </div>
         <div className="LeftSideBar__Body" id="scrollbar">
-         
+            <ContactList/>
         </div>
       </div>
     </div>

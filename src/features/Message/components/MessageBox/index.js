@@ -1,6 +1,7 @@
 import React from "react";
 import ContactBar from "./components/ContactBar";
 import FooterBox from "./components/FooterMessageBox";
+import MessageItem from "./components/MessageItem";
 import './style.scss';
 
 function MessageBox(props) {
@@ -12,42 +13,16 @@ function MessageBox(props) {
           </div>
         </div>
         <div className="MessageBox__Body" id="scrollbar">
-            <p>--------------------------dong 1---------------------------------</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>eua. Rhoncus dolor purus non enim praesent elementum facilisis leo</p>
-            <p>--------------------------dong cuoi---------------------------------</p>
+            <MessageItem name="Huỳnh Quế Trân"/>
+            <MessageItem name="Huỳnh Quế Trân"/> 
+            <MessageItem name="Huỳnh Quế Trân"/>
+            <MessageItem name="Lê Hữu Phúc" possition="right" message="Firebase"/>
+            <MessageItem name="Huỳnh Quế Trân"/> 
+            <MessageItem name="Huỳnh Quế Trân"/> 
+            <MessageItem name="Huỳnh Quế Trân" possition="right"/>
+            <MessageItem name="Huỳnh Quế Trân"/> 
+            <MessageItem name="Huỳnh Quế Trân" possition="right"/> 
+            <MessageItem name="Huỳnh Quế Trân"/> 
         </div>
         <div className="MessageBox__Footer">
           <FooterBox/>

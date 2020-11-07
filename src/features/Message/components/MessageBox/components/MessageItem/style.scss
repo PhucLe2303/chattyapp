@@ -1,0 +1,97 @@
+.Text-Style{
+    color: #647589;
+    font-size: 11px;
+    font-weight: 400;
+}
+
+
+.MessageItem{
+    width: 100%;
+    padding-left: 10px;
+    margin-bottom: 25px;
+    .MessageItem__Container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        clear: right;
+
+        .MessageItem__Avatar{
+            align-self: start;
+        }
+        .MessageItem__Content{
+            padding-left: 10px;
+            width: 70%;
+            .MessageItem__Detail{
+                display: flex;
+                align-items: center;
+
+                .MessageItem__Name{
+                    margin-right: 20px;
+                    font-family: "Montserrat",sans-serif;
+                    font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1920 - 320)));
+                    font-weight: 700;
+                    color: #223645;
+                }
+
+                .MessageItem__Date{
+                    p{
+                        @extend .Text-Style;
+                    }
+                }
+
+            }
+            .MessageItem__Msg{
+                border-radius: 30px;
+                min-height: 20px;
+                padding: 12px 20px;
+                background-color: #d5d9dc;
+                font-weight: 600;
+                font-size: 15px;
+                border-top-left-radius: 0;
+                p{
+                    margin: 0;
+                    overflow-wrap: break-word;
+                }
+            }
+
+            p{
+                margin: 0;
+            }
+
+        }
+    }
+
+    .MessageItem__Container--Right{
+        display: flex;
+        flex-direction: row-reverse;
+        align-items: center;
+        margin-right: 25px;
+        .MessageItem__Content--Right{
+            max-width: 70%;
+            display: flex;
+            flex-direction: column;
+            .MessageItem__Detail--Right{
+                text-align: right;
+                p{
+                    @extend .Text-Style;
+                    margin-top: 1px;
+                }
+    
+            }
+            .MessageItem__Msg--Right{
+
+                border-radius: 30px;
+                min-height: 20px;
+                padding: 12px 20px;
+                background-color: #d5d9dc;
+                font-weight: 600;
+                font-size: 15px;
+                border-bottom-right-radius: 0;
+                p{
+                    margin: 0;
+                    overflow-wrap: break-word;
+                }
+            }
+        }
+    }
+}
