@@ -1,9 +1,11 @@
 import { IconButton, InputAdornment, Tooltip } from "@material-ui/core";
 import InputField from "custom-fields/InputField";
 import PlusMenu from "../PlusMenu";
-import React from "react";
+import React, { useRef} from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import "./style.scss";
+import Sticker from "./Sticker";
+import fileAPI from "api/fileAPI";
 
 function FooterMessageBox(props) {
   const methods = useForm({
@@ -12,26 +14,40 @@ function FooterMessageBox(props) {
     defaultValues: {},
   });
   const { handleSubmit } = methods;
+  const refChoosePhoto = useRef();
 
   const onSubmit = (data) => {
     console.log(data);
   };
 
+  const handleChoosePhoto=(event)=>{
+    const fileUploaded = event.target.files[0];
+    fileAPI.upLoadPhoto(fileUploaded);
+  }
+
+  const handleChooseFile=(file)=>{
+    fileAPI.upLoadFile(file);
+    console.log(file);
+  }
+
   return (
     <div className="FooterBox__Container">
       <div className="Footer__SelectIcon">
         <IconButton>
-          <PlusMenu />
+          <PlusMenu clickAttachFile={handleChooseFile}/>
         </IconButton>
-        <IconButton>
-          <Tooltip title="Choose ticker">
-          <span className="fas fa-sticky-note btn-color"></span>
-          </Tooltip>
-        </IconButton>
-        <IconButton>
+      <Sticker/>
+        <IconButton onClick={()=>refChoosePhoto.current.click()}>
           <Tooltip title="Choose your image">
           <span className="fas fa-image btn-color"></span>
           </Tooltip>
+          <input
+            ref={refChoosePhoto}
+            type="file"
+            accept="image/*"
+            onChange={handleChoosePhoto}
+            style={{display:"none"}}
+          />
         </IconButton>
       </div>
       <FormProvider {...methods}>

@@ -4,7 +4,7 @@ import './style.scss';
 
 function ContactList(props) {
   const message = "Lê Hữu Phúc đẹp trai vãi cả đái :V";
-  const message2 = "cục cưng ơi cục cưng à";
+  const message2 = "hello";
   return(
   <>
     <ul className="ContactList">

@@ -1,10 +1,38 @@
-import { Avatar, IconButton, InputBase } from "@material-ui/core";
+import { Avatar, ClickAwayListener, IconButton, InputBase } from "@material-ui/core";
 import SearchIcon from "@material-ui/icons/Search";
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ContactList from './components/ContactList';
+import SearchList from "./components/SearchList";
 import "./style.scss";
 
 function LeftSideBar(props) {
+
+  const [valueSearch,setValueSearch]=useState();
+  const [isSearch,setIsSearch]=useState(false);
+  const refSearch = useRef();
+
+  useEffect(() => {
+    document.addEventListener('click', ClickAwayListener);
+    return () => {
+      document.removeEventListener('click', ClickAwayListener);
+    }
+  }, [])
+
+  const handleSearch=(value)=>{
+    console.log(value);
+  }
+
+  const handleClickSearch=()=>{
+    setIsSearch(true);
+    document.addEventListener('click', handleClickOutSide, false);
+  }
+
+  const handleClickOutSide=(event)=>{
+    if(!refSearch.current.contains(event.target)){
+      setIsSearch(false);
+      document.removeEventListener('click', handleClickOutSide, false);
+    }
+  }
 
   const handleClickShowNavButton=()=>{
     props.clickOpenNavBtn(true);
@@ -27,6 +55,7 @@ function LeftSideBar(props) {
         </div>
         <div className="LeftSideBar__SeachContent">
           <InputBase
+            onClick={handleClickSearch}
             placeholder="Search in Chatty"
             inputProps={{ "aria-label": "search google maps" }}
             className="LeftSideBar__Input"
@@ -35,8 +64,8 @@ function LeftSideBar(props) {
           >
           </InputBase>
         </div>
-        <div className="LeftSideBar__Body" id="scrollbar">
-            <ContactList/>
+        <div className="LeftSideBar__Body" id="scrollbar" ref={refSearch} onClick={handleClickOutSide}>
+            {isSearch?<SearchList/>:<ContactList/>}
         </div>
       </div>
     </div>

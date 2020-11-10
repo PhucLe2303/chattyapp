@@ -2,9 +2,11 @@ import React from "react";
 import { Divider, Drawer, IconButton, Tooltip } from "@material-ui/core";
 import logo from "assets/images/iconchat.png";
 import "./style.scss";
+import { useHistory } from "react-router-dom";
 
 function MainNav(props) {
   const { isOpen, isClose, clickSignOut } = props;
+  const history = useHistory();
 
   const toggleDrawer = (open) => (event) => {
     if (
@@ -16,6 +18,11 @@ function MainNav(props) {
     isClose(false);
   };
 
+  const handleClickLogo=()=>{
+    history.push('/');
+    window.location.reload();
+  }
+
   const handleClickSignOut=()=>{
     clickSignOut();
   };
@@ -23,7 +30,7 @@ function MainNav(props) {
   const drawer = (
     <div className="Toolbar">
       <div className="Toolbar__Header">
-        <IconButton>
+        <IconButton onClick={handleClickLogo}>
           <img
             style={{ width: "45px", height: "45px", borderRadius: "50%" }}
             src={logo}

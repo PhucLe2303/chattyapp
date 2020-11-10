@@ -8,7 +8,6 @@ const PrivateRoute = ({ component: Component, ...rest }) => {
 
   const token = cookies.get('token');
   const checkAuthenticated = token ? true:false;
-  console.log(checkAuthenticated);
   return (
     <Route
       {...rest}
