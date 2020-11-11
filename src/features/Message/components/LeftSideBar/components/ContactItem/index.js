@@ -2,6 +2,7 @@ import { Avatar } from '@material-ui/core';
 import React from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
+import AvatarComponents from 'features/Message/components/Avatar';
 
 ContactItem.propTypes={
     name:PropTypes.string,
@@ -9,6 +10,7 @@ ContactItem.propTypes={
     sender:PropTypes.string,
     message:PropTypes.string,
     date:PropTypes.string,
+    isOnline:PropTypes.bool,
 };
 
 ContactItem.defaultProps={
@@ -16,17 +18,18 @@ ContactItem.defaultProps={
     urlImage:null,
     sender:"sender",
     message:"message",
-    date:"06/11/2020"
+    date:"06/11/2020",
+    isOnline:false,
 }
 
 function ContactItem(props) {
 
-    const {name,urlImage,sender,message,date}=props;
+    const {name,urlImage,sender,message,date,isOnline}=props;
 
     return (
         <li className="ContactItem">
             <div className="ContactItem__Avatar">
-                <Avatar alt={name} src={urlImage}/>
+                <AvatarComponents src={urlImage} isOnline={isOnline}/>
             </div>
             <div className="ContactItem__Detail">
                 <h4>{name}</h4>

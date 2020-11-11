@@ -8,7 +8,7 @@ function ContactList(props) {
   return(
   <>
     <ul className="ContactList">
-      <ContactItem name="le huu phuc" sender="you" message={message} date="20/11/2020"/>
+      <ContactItem name="le huu phuc" sender="you" message={message} date="20/11/2020" isOnline={true}/>
       <ContactItem name="Huỳnh Quế Trân" sender="Phúc" message={message2} date="23/03/2020"/>
       <ContactItem/>
       <ContactItem/>

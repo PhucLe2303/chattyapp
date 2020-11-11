@@ -1,16 +1,29 @@
-import { Avatar, IconButton, Tooltip } from "@material-ui/core";
+import { IconButton, Tooltip } from "@material-ui/core";
 import CallIcon from "@material-ui/icons/Call";
 import VideoCallIcon from "@material-ui/icons/VideoCall";
 import InfoIcon from "@material-ui/icons/Info";
 import React from "react";
 import "./style.scss";
+import AvatarComponents from "features/Message/components/Avatar";
+import PropsType from "prop-types";
+
+ContactBar.propsType = {
+  urlImage: PropsType.string,
+  isOnline: PropsType.bool,
+};
+
+ContactBar.defaultProp = {
+  urlImage: "",
+  isOnline: false,
+};
 
 function ContactBar(props) {
+  const { isOnline, urlImage } = props;
   return (
     <div className="ContactBar">
       <div className="ListBar">
         <div className="ContactBar__Avatar">
-          <Avatar></Avatar>
+          <AvatarComponents isOnline={isOnline} urlImage={urlImage} />
         </div>
         <ul className="ContactBar__Menu">
           <li className="ContactBar__Call">

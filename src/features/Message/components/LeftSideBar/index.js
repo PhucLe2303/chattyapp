@@ -10,29 +10,25 @@ function LeftSideBar(props) {
   const [valueSearch,setValueSearch]=useState();
   const [isSearch,setIsSearch]=useState(false);
   const refSearch = useRef();
-
-  useEffect(() => {
-    document.addEventListener('click', ClickAwayListener);
-    return () => {
-      document.removeEventListener('click', ClickAwayListener);
-    }
-  }, [])
+  const refSearchInput = useRef();
 
   const handleSearch=(value)=>{
     console.log(value);
   }
 
-  const handleClickSearch=()=>{
-    setIsSearch(true);
-    document.addEventListener('click', handleClickOutSide, false);
-  }
-
-  const handleClickOutSide=(event)=>{
-    if(!refSearch.current.contains(event.target)){
-      setIsSearch(false);
-      document.removeEventListener('click', handleClickOutSide, false);
+  const handleClickOutSide = (event) => {
+    if(refSearchInput.current.contains(event.target)){
+      setIsSearch(true);
+      document.addEventListener("click", handleClickOutSide, false);
+      return;
     }
-  }
+    if (refSearch.current&&!refSearch.current.contains(event.target)) {
+      if (!refSearchInput.current.contains(event.target)) {
+        setIsSearch(false);
+        document.removeEventListener("click", handleClickOutSide, false);
+      }
+    }
+  };
 
   const handleClickShowNavButton=()=>{
     props.clickOpenNavBtn(true);
@@ -43,7 +39,7 @@ function LeftSideBar(props) {
       <div className="LeftSideBar__Content">
         <div className="LeftSideBar__Header">
           <div className="LeftSideBar__Avatar">
-            <Avatar></Avatar>
+            <Avatar/>
           </div>
           <h2>Chatty</h2>
           <div style={{flex:"1 1 auto"}}></div>
@@ -53,19 +49,20 @@ function LeftSideBar(props) {
             </IconButton>
           </div>
         </div>
-        <div className="LeftSideBar__SeachContent">
+        <div className="LeftSideBar__SeachContent" >
+          <div ref={refSearchInput} onClick={handleClickOutSide}>
           <InputBase
-            onClick={handleClickSearch}
+            autoComplete='off'
             placeholder="Search in Chatty"
-            inputProps={{ "aria-label": "search google maps" }}
+            inputProps={{ "aria-label": "Search in Chatty" }}
             className="LeftSideBar__Input"
             startAdornment={
               <SearchIcon/>}
-          >
-          </InputBase>
+          />
+          </div>
         </div>
-        <div className="LeftSideBar__Body" id="scrollbar" ref={refSearch} onClick={handleClickOutSide}>
-            {isSearch?<SearchList/>:<ContactList/>}
+        <div className="LeftSideBar__Body" id="scrollbar">
+            {isSearch?<div ref={refSearch} onClick={handleClickOutSide}><SearchList/></div>:<ContactList/>}
         </div>
       </div>
     </div>

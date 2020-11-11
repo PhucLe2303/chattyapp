@@ -5,7 +5,7 @@ import Paper from "@material-ui/core/Paper";
 import Popper from "@material-ui/core/Popper";
 import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
-import { Button, Tooltip } from "@material-ui/core";
+import { Tooltip } from "@material-ui/core";
 import GifIcon from "@material-ui/icons/Gif";
 
 export default function PlusMenu(props) {

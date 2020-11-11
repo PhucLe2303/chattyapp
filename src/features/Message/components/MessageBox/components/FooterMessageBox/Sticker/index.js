@@ -73,7 +73,6 @@ export default function Sticker(props) {
       StickerAPI.getQooBee()
       .then((data) => {
         setQooBee(data);
-        console.log(data);
         setLoading(false);
       })
       .catch((err) => {
@@ -87,7 +86,6 @@ export default function Sticker(props) {
       StickerAPI.getMeep()
         .then((data) => {
           setMeep(data);
-          console.log(data);
           setLoading(false);
         })
         .catch((err) => {
@@ -102,7 +100,6 @@ export default function Sticker(props) {
       StickerAPI.getSpeedy()
         .then((data) => {
           setSpeedy(data);
-          console.log(data);
           setLoading(false);
         })
         .catch((err) => {

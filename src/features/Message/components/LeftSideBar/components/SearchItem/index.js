@@ -1,7 +1,7 @@
 import React from "react";
 import PropsType from "prop-types";
 import "./style.scss";
-import { Avatar, Button, Icon } from "@material-ui/core";
+import { Avatar, Button } from "@material-ui/core";
 
 SearchItem.propsType = {
   urlImage: PropsType.string,

@@ -1,10 +1,10 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Avatar } from "@material-ui/core";
 import "./style.scss";
+import AvatarComponents from "features/Message/components/Avatar";
 
 MessageItem.propTypes = {
-  possition: PropTypes.string,
+  pos: PropTypes.string,
   urlImage: PropTypes.string,
   message: PropTypes.string,
   date: PropTypes.string,
@@ -12,7 +12,7 @@ MessageItem.propTypes = {
 };
 
 MessageItem.defaultProps = {
-  possition: "left",
+  pos: "left",
   urlImage: null,
   message:
     "Firebase can help you tackle demanding challenges, whether you’re a developer, marketer, or product manager. Our tools work together so that mobile teams can improve app performance while gaining valuable user insights.Firebase can help you tackle demanding challenges, whether you’re a developer, marketer, or product manager. Our tools work together so that mobile teams can improve app performance while gaining valuable user insights.Firebase can help you tackle demanding challenges, whether you’re a developer, marketer, or product manager. Our tools work together so that mobile teams can improve app performance while gaining valuable user insights.",
@@ -21,12 +21,12 @@ MessageItem.defaultProps = {
 };
 
 function MessageItem(props) {
-  const { possition, urlImage, name, message, date } = props;
+  const { pos, urlImage, name, message, date } = props;
 
   const leftMessageItem = (
     <div className="MessageItem__Container">
       <div className="MessageItem__Avatar">
-        <Avatar src={urlImage} />
+      <AvatarComponents isOnline={true} urlImage={urlImage}/>
       </div>
       <div className="MessageItem__Content">
         <div className="MessageItem__Detail">
@@ -59,7 +59,7 @@ function MessageItem(props) {
 
   return (
     <div className="MessageItem">
-      {possition === "left" ? leftMessageItem : rightMessageItem}
+      {pos === "left" ? leftMessageItem : rightMessageItem}
     </div>
   );
 }

@@ -39,7 +39,7 @@ function FooterMessageBox(props) {
       <Sticker/>
         <IconButton onClick={()=>refChoosePhoto.current.click()}>
           <Tooltip title="Choose your image">
-          <span className="fas fa-image btn-color"></span>
+          <span className="fas fa-image btn-color"/>
           </Tooltip>
           <input
             ref={refChoosePhoto}
