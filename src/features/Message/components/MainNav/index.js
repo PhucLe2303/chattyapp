@@ -1,11 +1,12 @@
 import React from "react";
-import { Divider, Drawer, IconButton, Tooltip } from "@material-ui/core";
+import { Badge, Divider, Drawer, IconButton, Tooltip } from "@material-ui/core";
 import logo from "assets/images/iconchat.png";
 import "./style.scss";
 import { useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function MainNav(props) {
-  const { isOpen, isClose, clickSignOut } = props;
+  const { isOpen, isClose, clickSignOut, numberOfFriendRequests, chooseOption } = props;
   const history = useHistory();
 
   const toggleDrawer = (open) => (event) => {
@@ -27,6 +28,18 @@ function MainNav(props) {
     clickSignOut();
   };
 
+  const handleClickNotification=()=>{
+    chooseOption(2)
+  }
+
+  const handleClickFriends=()=>{
+    chooseOption(1);
+  }
+
+  const handleClickMessages=()=>{
+    chooseOption(0);
+  }
+
   const drawer = (
     <div className="Toolbar">
       <div className="Toolbar__Header">
@@ -44,23 +57,25 @@ function MainNav(props) {
           <ul className="Toolbar__ListBody">
             <li>
               <Tooltip title="Messages" placement="right-end">
-                <IconButton className="Btn">
+                <IconButton className="Btn" onClick={handleClickMessages}>
                   <span className="fas fa-comment-dots icon" />
                 </IconButton>
               </Tooltip>
             </li>
             <li>
               <Tooltip title="Friends" placement="right-end">
-                <IconButton className="Btn">
+                <IconButton className="Btn" onClick={handleClickFriends}>
                   <span className="fas fa-user-friends icon" />
                 </IconButton>
               </Tooltip>
             </li>
             <li>
               <Tooltip title="Nocification" placement="right-end">
-                <IconButton className="Btn">
+              <Badge badgeContent={numberOfFriendRequests} color="error">
+                <IconButton className="Btn" onClick={handleClickNotification}>
                   <span className="fas fa-bell icon" />
                 </IconButton>
+              </Badge>
               </Tooltip>
             </li>
           </ul>

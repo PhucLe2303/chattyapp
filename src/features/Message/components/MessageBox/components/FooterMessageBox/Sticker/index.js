@@ -181,7 +181,7 @@ export default function Sticker(props) {
           horizontal: "center",
         }}
         transformOrigin={{
-          vertical: "top",
+          vertical: "bottom",
           horizontal: "center",
         }}
       >

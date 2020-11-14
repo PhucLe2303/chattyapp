@@ -40,7 +40,7 @@ const SignUp = () => {
   const onSubmit = (value) => {
     setLoading(true);
     userAPI
-      .signUpWithEmail(value.email, value.password)
+      .signUpWithEmail(value.email, value.password,value.firstname,value.lastname)
       .then((value) => {
         setLoading(false);
         dispatch(
@@ -109,7 +109,6 @@ const SignUp = () => {
                   className="SignUp__btnSubmit"
                   type="submit"
                   fullWidth
-                  onClick={() => setLoading(true)}
                 >
                   {loading ? (
                     <CircularProgress size={25.75} className="Circular" />

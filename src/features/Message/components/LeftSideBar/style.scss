@@ -11,6 +11,10 @@
       height: 60px;
       align-items: center;
 
+      h2{
+        color:#1c9dea;
+      }
+
       .LeftSideBar__Avatar {
         display: flex;
         flex-direction: row;
@@ -43,7 +47,7 @@
 
     .LeftSideBar__Body {
       height: calc(100vh - 120px);
-      overflow-y: scroll;
+      overflow-y: auto;
       padding-left: 0px;
       overflow-x: hidden;
 
@@ -52,6 +56,45 @@
         width: 100%;
         padding: 0;
       }
+    }
+
+    .LeftSideBar__Body--Notify {
+
+      @extend .LeftSideBar__Body;
+
+    }
+    .LeftSideBar__Header--Notify{
+      h2{
+        margin: 10px;
+        margin-bottom: 2px;
+        margin-top: 5px;
+        margin-left: 10px;
+        text-align: left;
+        color:#223645;
+        font-size: calc(18px + (28 - 20) * ((100vw - 320px) / (1920 - 320)));
+        font-weight: 700;
+      }
+      h4{
+        margin: 5px;
+        margin-top: 2px;
+        margin-left: 10px;
+        font-size: calc(14px + (16 - 14) * ((100vw - 320px) / (1920 - 320)));
+        font-family: "Roboto",sans-serif;
+        text-align: left;
+        font-weight: 400;
+        color: #647589;
+      }
+    }
+
+    .LeftSideBar__Header--Friend{
+      @extend .LeftSideBar__Header--Notify;
+    }
+
+    .LeftSideBar__Body--Friend{
+      height: calc(100vh - 120px);
+      overflow-y: auto;
+      padding-left: 0px;
+      overflow-x: hidden;
     }
   }
 }

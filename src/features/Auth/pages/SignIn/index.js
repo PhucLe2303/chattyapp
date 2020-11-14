@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { Button, IconButton, CircularProgress } from "@material-ui/core";
 import "./SignIn.scss";
@@ -30,23 +30,27 @@ function SignIn() {
   const { handleSubmit } = methods;
   const dispatch = useDispatch();
   const history = useHistory();
-
   const [loading, setLoading] = useState(false);
+  const [didMount,setDidMount] = useState(false);
+
+  useEffect(()=>{
+    setDidMount(true);
+    return ()=> setDidMount(false);
+  },[])
+
 
   const onSubmit = (data) => {
     setLoading(true);
     userAPI.signInWithEmail(data.email,data.password).then((user)=>{
       dispatch(setCurrentUser({
-        name:null,
-        picture:null,
-        ...user,
+        ...user
       }));
       dispatch(setNotification({
         type:"success",
         message:"Sign in is Success",
       }));
-      history.push('/');
       setLoading(false);
+      history.push('/');
     }).catch((err)=>{
       dispatch(setNotification({
         type:'error',
@@ -56,16 +60,10 @@ function SignIn() {
     })
   };
 
-  const handleClickForgotPassword = () => {
-    console.log("click forgot password");
-  };
-
   const handleClickSignInWithGoogle=()=>{
     userAPI.signInWithGoogle().then((user)=>{
       dispatch(setCurrentUser({
-        name:null,
-        picture:null,
-        ...user,
+        ...user
       }));
       dispatch(setNotification({
         type:"success",
@@ -118,7 +116,6 @@ function SignIn() {
               <Link
                 to="/resetpassword"
                 className="ForgotPassword"
-                onClick={handleClickForgotPassword}
               >
                 Forgot Password?
               </Link>
@@ -128,7 +125,6 @@ function SignIn() {
                 size="large"
                 className="SignIn__Button"
                 type="submit"
-                onClick={() => setLoading(true)}
               >
                 {loading ? (
                   <CircularProgress size={25.75} className="Circular" />

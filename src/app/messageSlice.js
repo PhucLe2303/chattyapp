@@ -1,21 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialState={
-   currentOptionNav:null,
+   friendRequests:[],
 }
 
 const messageSlice = createSlice({
     name:"message",
     initialState:initialState,
     reducers:{
-        setOptionNav:(state,action)=>{
-            state.currentOptionNav=action.payload;
-        },
+        setfriendRequests:(state,action)=>{
+            state.friendRequests=action.payload;
+        }
     }
 
 });
 
 const {reducer,actions}=messageSlice;
 
-export const {setOptionNav}=actions;
+export const {setfriendRequests}=actions;
 export default reducer; 

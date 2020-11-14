@@ -4,10 +4,12 @@ import Cookies from 'universal-cookie';
 
 const initialState={
     currentUser:{
-        uid:null,
-        name:null,
-        picture:null,
-        token:null,
+        uid:'',
+        firstName:'',
+        lastName:'',
+        picture:'',
+        token:'',
+        email:'',
     },
 }
 

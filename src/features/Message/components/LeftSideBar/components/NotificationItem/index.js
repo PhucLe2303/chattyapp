@@ -3,26 +3,22 @@ import PropsType from "prop-types";
 import "./style.scss";
 import { Avatar, Button } from "@material-ui/core";
 import userAPI from 'api/userAPI';
-import {useSelector } from "react-redux";
 
-SearchItem.propsType = {
+NotificationItem.propsType = {
   urlImage: PropsType.string,
   isFriend: PropsType.bool,
 };
 
-SearchItem.defaultProps = {
+NotificationItem.defaultProps = {
   urlImage: "",
   isFriend: false,
 };
 
-function SearchItem(props) {
-  const {uid, name, urlImage, isFriend } = props;
-  const id = useSelector((state)=>state.user.currentUser.uid);
+function NotificationItem(props) {
+  const {uid, name, urlImage } = props;
 
   const handleClickAddFriend=()=>{
-    userAPI.sendFriendRequest(id,uid).catch((error)=>{
-      console.log(error);
-    })
+
   }
 
   const handleClickUnFriend=()=>{
@@ -30,42 +26,39 @@ function SearchItem(props) {
   }
 
   return (
-    <li className="SearchItem">
-      <div className="SearchItem__Info">
-        <div className="SearchItem__Avatar">
+    <li className="NotificationItem">
+        <div className="NotificationItem__Avatar">
           <Avatar alt={name} src={urlImage} />
         </div>
-        <div className="SearchItem__Name">
+      <div className="NotificationItem__Body">
+        <div className="NotificationItem__Name">
           <h4>{name}</h4>
         </div>
-      </div>
-      <div className="SearchItem__Btn">
-        {isFriend===false ? (
+        <div className="NotificationItem__Btn">
           <Button
             variant="contained"
             onClick={handleClickAddFriend}
-            className="SearchItem__Btn--add"
+            className="NotificationItem__Btn--add"
             color="primary"
             size="small"
             startIcon={<span className="fas fa-user-plus" />}
           >
-            Add Friend
+            Accept
           </Button>
-        ) : (
           <Button
             variant="contained"
             onClick={handleClickUnFriend}
             color="primary"
-            className="SearchItem__Btn--unfr"
+            className="NotificationItem__Btn--remove"
             size="small"
-            startIcon={<span className="fas fa-users-slash" />}
+            startIcon={<span className="fas fa-user-slash" />}
           >
-            UnFriend
+            Remove
           </Button>
-        )}
+      </div>
       </div>
     </li>
   );
 }
 
-export default SearchItem;
+export default NotificationItem;

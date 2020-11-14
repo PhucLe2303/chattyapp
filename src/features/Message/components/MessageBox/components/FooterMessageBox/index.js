@@ -6,8 +6,10 @@ import { FormProvider, useForm } from "react-hook-form";
 import "./style.scss";
 import Sticker from "./Sticker";
 import fileAPI from "api/fileAPI";
+import Emoji from './Emoji';
 
 function FooterMessageBox(props) {
+
   const methods = useForm({
     mode: "onTouched",
     reValidateMode: "onChange",
@@ -19,6 +21,13 @@ function FooterMessageBox(props) {
   const onSubmit = (data) => {
     console.log(data);
   };
+
+  const handleClickEmoji=(emoji)=>{
+    console.log(emoji);
+    let value = methods.getValues('message');
+    value = value + emoji.native;
+    methods.setValue('message',value);
+  }
 
   const handleChoosePhoto=(event)=>{
     const fileUploaded = event.target.files[0];
@@ -36,7 +45,7 @@ function FooterMessageBox(props) {
         <IconButton>
           <PlusMenu clickAttachFile={handleChooseFile}/>
         </IconButton>
-      <Sticker/>
+        <Sticker/>
         <IconButton onClick={()=>refChoosePhoto.current.click()}>
           <Tooltip title="Choose your image">
           <span className="fas fa-image btn-color"/>
@@ -63,9 +72,7 @@ function FooterMessageBox(props) {
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
-                  <Tooltip title="Choose emoji">
-                  <span className="fas fa-smile btn-color" style={{fontSize:"1.5rem",cursor:"pointer"}}/>
-                  </Tooltip>
+                  <Emoji emojiProps={handleClickEmoji}/>
                 </InputAdornment>
               ),
             }}

@@ -1,4 +1,3 @@
-import { Avatar } from '@material-ui/core';
 import React from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';

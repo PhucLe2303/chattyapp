@@ -9,7 +9,6 @@ function MessageBox(props) {
   const ref=useRef();
   
   const handleOnScroll = ()=> {
-    console.log('scrollll');
     ref.current.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
