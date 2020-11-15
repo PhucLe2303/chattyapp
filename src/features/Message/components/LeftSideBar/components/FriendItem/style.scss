@@ -8,7 +8,6 @@ $backGround-item-hover: rgba(0, 132, 255, 0.2);
   margin-bottom: 5px;
   padding-right: 10px;
   padding-left: 16px;
-  cursor: pointer;
   height: 64px;
 
   .FriendItem__Info{
@@ -18,7 +17,8 @@ $backGround-item-hover: rgba(0, 132, 255, 0.2);
 
     .FriendItem__Avatar {
         margin-right: 5px;
-      }
+        cursor: pointer;
+    }
     
       .FriendItem__Name {
         h4 {
@@ -30,6 +30,10 @@ $backGround-item-hover: rgba(0, 132, 255, 0.2);
           font-weight: 500;
           overflow: hidden;
           max-width: 120px;
+          cursor: pointer;
+          &:hover{
+            text-decoration: underline;
+          }
         }
       }
   }
@@ -43,7 +47,7 @@ $backGround-item-hover: rgba(0, 132, 255, 0.2);
     }
   }
 
-  &:hover {
-    background-color: $backGround-item-hover;
+  &:hover{
+    background-color:$backGround-item-hover;
   }
 }

@@ -3,41 +3,48 @@ import PropsType from "prop-types";
 import "./style.scss";
 import { Avatar, Button } from "@material-ui/core";
 import userAPI from 'api/userAPI';
+import { useDispatch, useSelector } from "react-redux";
+import {setCurrentContact} from 'app/messageSlice';
 
 NotificationItem.propsType = {
   urlImage: PropsType.string,
-  isFriend: PropsType.bool,
 };
 
 NotificationItem.defaultProps = {
   urlImage: "",
-  isFriend: false,
 };
 
 function NotificationItem(props) {
-  const {uid, name, urlImage } = props;
 
-  const handleClickAddFriend=()=>{
+  const { uid, name, picture } = props;
+  const currentUid = useSelector((state)=>state.user.currentUser.uid);
+  const dispatch = useDispatch();
 
-  }
+  const handleClickAccept = () => {
+    userAPI.AcceptFriendRequest(currentUid,uid).then().catch((error)=>{console.log(error)});
+  };
 
-  const handleClickUnFriend=()=>{
+  const handleClickRemove = () => {
+    userAPI.removeFriendRequest(currentUid,uid).then().catch((error)=>{console.log(error)});
+  };
 
+  const handleClick=()=>{
+    dispatch(setCurrentContact(uid));
   }
 
   return (
     <li className="NotificationItem">
-        <div className="NotificationItem__Avatar">
-          <Avatar alt={name} src={urlImage} />
-        </div>
+      <div className="NotificationItem__Avatar" onClick={handleClick}>
+        <Avatar alt={name} src={picture}/>
+      </div>
       <div className="NotificationItem__Body">
         <div className="NotificationItem__Name">
-          <h4>{name}</h4>
+          <h4 onClick={handleClick}>{name}</h4>
         </div>
         <div className="NotificationItem__Btn">
           <Button
             variant="contained"
-            onClick={handleClickAddFriend}
+            onClick={handleClickAccept}
             className="NotificationItem__Btn--add"
             color="primary"
             size="small"
@@ -47,7 +54,7 @@ function NotificationItem(props) {
           </Button>
           <Button
             variant="contained"
-            onClick={handleClickUnFriend}
+            onClick={handleClickRemove}
             color="primary"
             className="NotificationItem__Btn--remove"
             size="small"
@@ -55,7 +62,7 @@ function NotificationItem(props) {
           >
             Remove
           </Button>
-      </div>
+        </div>
       </div>
     </li>
   );

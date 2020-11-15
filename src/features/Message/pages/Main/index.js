@@ -2,7 +2,7 @@ import { Grid } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import userAPI from "api/userAPI";
 import { removeCurrentUser } from "app/userSlice";
-import {setfriendRequests} from 'app/messageSlice';
+import {setfriendRequests,setfriendList,setSendFriendRequest} from 'app/messageSlice';
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import MainNav from "features/Message/components/MainNav";
@@ -22,10 +22,27 @@ const MainPage = () => {
     userAPI.receiveFriendRequestListener(uid,(snapshot)=>{
       if(!snapshot.val()){
         setNumberOfFriendRequests(0);
+        dispatch(setfriendRequests([]));
         return;
       }
       dispatch(setfriendRequests(Object.keys(snapshot.val())));
       setNumberOfFriendRequests(Object.keys(snapshot.val()).length);
+    });
+
+    userAPI.friendListListener(uid,(snapshot)=>{
+      if(!snapshot.val()){
+        dispatch(setfriendList([]));
+        return;
+      }
+      dispatch(setfriendList(Object.keys(snapshot.val())));
+    });
+
+    userAPI.sendFriendRequestListener(uid,(snapshot)=>{
+      if(!snapshot.val()){
+        dispatch(setSendFriendRequest([]));
+        return;
+      }
+      dispatch(setSendFriendRequest(Object.keys(snapshot.val())));
     });
   },[]);
 
@@ -69,7 +86,7 @@ const MainPage = () => {
         </Grid>
         <Grid
           item
-          sx={4}
+          xs={false}
           className="Main__LeftSideBar"
         >
           <div className="Main__Container">
@@ -78,7 +95,7 @@ const MainPage = () => {
         </Grid>
         <Grid
           item
-          sx={8}
+          xs={false}
           className="Main__MessageBox"
         >
           <MessageBox />

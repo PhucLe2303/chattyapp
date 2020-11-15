@@ -8,11 +8,11 @@ $backGround-item-hover:rgba(0, 132, 255, .2);
     margin-bottom: 5px;
     padding-right: 10px;
     padding-left: 16px;
-    cursor: pointer;
     height: 64px;
 
     .NotificationItem__Avatar{
         margin-right: 10px;
+        cursor: pointer;
     }
     .NotificationItem__Body{
         display: flex;
@@ -30,6 +30,10 @@ $backGround-item-hover:rgba(0, 132, 255, .2);
                 font-weight: 500;
                 overflow: hidden;
                 max-width: 150px;
+                cursor: pointer;
+                &:hover{
+                    text-decoration: underline;
+                }
             }
         }
     
@@ -48,9 +52,10 @@ $backGround-item-hover:rgba(0, 132, 255, .2);
             span{
                 font-size: 10px;
                }
+            }
         }
     }
-    }
+
     &:hover{
         background-color: $backGround-item-hover;
     }

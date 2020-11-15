@@ -347,12 +347,92 @@ const userAPI = {
     })
   },
 
+  AcceptFriendRequest:(uid,fromUid)=>{
+    return new Promise((resolve,reject)=>{
+
+      //add uid to db
+      db.ref('users/'+ uid+ '/friends/'+ fromUid).set(true).then(()=>resolve(true)).catch((error)=>{
+        reject(error);
+        console.log(error);
+      });
+
+      db.ref('users/'+ fromUid + '/friends/'+ uid).set(true).then(()=>resolve(true)).catch((error)=>{
+        reject(error);
+        console.log(error);
+      });
+
+      //remove uid from db 
+
+      db.ref('users/'+ uid + '/friendRequests/' + 'fromUsers/' + fromUid).remove().then(()=>resolve(true)).catch((error)=>{
+        reject(error);
+        console.log(error);
+      });
+
+      db.ref('users/'+ fromUid + '/friendRequests/' + 'toUsers/' + uid).remove().then(()=>resolve(true)).catch((error)=>{
+        reject(error);
+        console.log(error);
+      });
+
+      db.ref('users/'+ uid + '/friendRequests/' + 'toUsers/' + fromUid).remove().then(()=>resolve(true)).catch((error)=>{
+        reject(error);
+        console.log(error);
+      });
+
+    });
+  },
+
+  removeFriendRequest:(uid,fromUid)=>{
+    return new Promise((resolve,reject)=>{
+      db.ref('users/'+ uid + '/friendRequests/' + 'fromUsers/' + fromUid).remove().then(()=>resolve(true)).catch((error)=>{
+        reject(error);
+        console.log(error);
+      });
+
+      db.ref('users/'+ fromUid + '/friendRequests/' + 'toUsers/' + uid).remove().then(()=>resolve(true)).catch((error)=>{
+        reject(error);
+        console.log(error);
+      });
+    });
+  },
+
+  removeRequest:(uid,toUid)=>{
+    return new Promise((resolve,reject)=>{
+      db.ref('users/'+uid+'/friendRequests/'+ 'toUsers/' + toUid).remove().then(()=>resolve(true)).catch((error)=>{
+        reject(error);
+        console.log(error);
+      });
+
+      db.ref('users/'+toUid+'/friendRequests/'+ 'fromUsers/' + uid).remove().then(()=>resolve(true)).catch((error)=>{
+        reject(error);
+        console.log(error);
+      });
+    })
+  },
+
+  removeFriend:(currentUid,uid)=>{
+    return new Promise((resolve,reject)=>{
+      db.ref('users/'+currentUid+'/friends/'+uid).remove().then(()=>resolve(true)).catch((error)=>{
+        reject(error);
+        console.log(error);
+      });
+
+      db.ref('users/'+uid+'/friends/'+currentUid).remove().then(()=>resolve(true)).catch((error)=>{
+        reject(error);
+        console.log(error);
+      });
+    });
+  },
+
   receiveFriendRequestListener:(uid,handleFunc)=>{//lang nghe nguoi khac gui loi moi ket ban
     return db.ref('users/'+ uid + '/friendRequests/' + 'fromUsers').on('value',handleFunc);
   },
 
+  friendListListener:(uid,handleFunc)=>{
+    return db.ref('users/'+ uid +'/friends/').on('value',handleFunc);
+  },
+
   sendFriendRequestListener:(uid,handleFunction)=>{//lang nghe nguoi khac chap nhan loi moi
-    return db.ref('users/').on('value',handleFunction);
+    return db.ref('users/'+ uid + '/friendRequests/' + 'toUsers/').on('value',handleFunction);
   }
 }
 

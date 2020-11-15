@@ -1,23 +1,16 @@
 import React, { useEffect, useRef } from "react";
+import { useSelector } from "react-redux";
 import ContactBar from "./components/ContactBar";
 import FooterBox from "./components/FooterMessageBox";
-import MessageItem from "./components/MessageItem";
+import MessageBody from "./components/MessageBody";
 import './style.scss';
 
 function MessageBox(props) {
 
-  const ref=useRef();
   
-  const handleOnScroll = ()=> {
-    ref.current.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-    });
-  }
+  const currentContact = useSelector((state)=>state.message.currentContact);
+  
 
-  useEffect(()=>{
-    handleOnScroll();
-  },[]);
 
   return (
       <div className="MessageBox">
@@ -27,20 +20,10 @@ function MessageBox(props) {
           </div>
         </div>
         <div className="MessageBox__Body" id="scrollbar">
-            <MessageItem name="Huỳnh Quế Trân"/>
-            <MessageItem name="Huỳnh Quế Trân"/> 
-            <MessageItem name="Huỳnh Quế Trân"/>
-            <MessageItem name="Lê Hữu Phúc" pos="right" message="Firebase"/>
-            <MessageItem name="Huỳnh Quế Trân"/> 
-            <MessageItem name="Huỳnh Quế Trân"/> 
-            <MessageItem name="Huỳnh Quế Trân" pos="right"/>
-            <MessageItem name="Huỳnh Quế Trân"/> 
-            <MessageItem name="Huỳnh Quế Trân" pos="right"/> 
-            <MessageItem name="Huỳnh Quế Trân"/>
-            <div ref={ref}></div>
+            {currentContact!==''?<MessageBody/>:<div>not things to display</div>}
         </div>
         <div className="MessageBox__Footer">
-          <FooterBox/>
+            {currentContact!==''?<FooterBox/>:null}
         </div>
       </div>
   );

@@ -3,12 +3,16 @@ import SearchItem from '../SearchItem';
 import userAPI from 'api/userAPI';
 import './style.scss';
 import Loading from 'components/Loading';
+import { useSelector } from 'react-redux';
 
 function SearchList(props) {
 
     const [listUser,setListUser]=useState([]);
     const {searchValue}=props;
     const [loading,setLoading]= useState(false);
+    const listSendRequest = useSelector((state)=>state.message.sendFriendRequests);
+    const listFriend=useSelector((state)=>state.message.friendList);
+    // console.log(listSendRequest);
 
     function removeUnicode(str) {
         str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
@@ -54,7 +58,31 @@ function SearchList(props) {
     return (
         <ul className="SearchList">
             {loading?<Loading/>:listUser.map((user)=>{
-                return<SearchItem key={user[0]} uid={user[0]} name={user[1].firstName+" "+user[1].lastName} isFriend={false}/>
+                if(listSendRequest!==null&&listSendRequest.includes(user[0])){
+                    return<SearchItem 
+                    key={user[0]} 
+                    uid={user[0]} 
+                    name={user[1].firstName+" "+user[1].lastName} 
+                    isFriend={false}
+                    isRequestFriend={true}
+                    />
+                }
+                if(listFriend!==null&&listFriend.includes(user[0])){
+                    return<SearchItem 
+                    key={user[0]} 
+                    uid={user[0]} 
+                    name={user[1].firstName+" "+user[1].lastName} 
+                    isFriend={true}
+                    isRequestFriend={false}
+                    />
+                }
+                return<SearchItem 
+                key={user[0]} 
+                uid={user[0]} 
+                name={user[1].firstName+" "+user[1].lastName} 
+                isFriend={false}
+                isRequestFriend={false}
+                />
             })}
         </ul>
     );

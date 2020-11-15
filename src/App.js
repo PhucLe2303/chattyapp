@@ -47,7 +47,7 @@ function App() {
     <div className="App">
       {isLoading?<Loading/>:
       <Router>
-        <Suspense fallback={<div>Loading ...</div>}>
+        <Suspense fallback={<div><Loading/></div>}>
           <Switch>
             <PrivateRoute exact path="/" component={MainPage}></PrivateRoute>
             <Route exact path="/signin" component={SignIn} />

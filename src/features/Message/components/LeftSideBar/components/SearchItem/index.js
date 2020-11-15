@@ -4,20 +4,24 @@ import "./style.scss";
 import { Avatar, Button } from "@material-ui/core";
 import userAPI from 'api/userAPI';
 import {useSelector } from "react-redux";
+import CancelIcon from '@material-ui/icons/Cancel';
 
 SearchItem.propsType = {
-  urlImage: PropsType.string,
+  picture: PropsType.string,
   isFriend: PropsType.bool,
+  isRequestFriend:PropsType.bool,
 };
 
 SearchItem.defaultProps = {
-  urlImage: "",
+  picture: "",
   isFriend: false,
+  isRequestFriend:false,
 };
 
 function SearchItem(props) {
-  const {uid, name, urlImage, isFriend } = props;
+  const {uid, name, picture, isFriend, isRequestFriend } = props;
   const id = useSelector((state)=>state.user.currentUser.uid);
+  console.log(isRequestFriend);
 
   const handleClickAddFriend=()=>{
     userAPI.sendFriendRequest(id,uid).catch((error)=>{
@@ -26,21 +30,29 @@ function SearchItem(props) {
   }
 
   const handleClickUnFriend=()=>{
+    userAPI.removeFriend(id,uid).then().catch((error)=>{
+      console.log(error);
+    })
+  }
 
+  const handleClickCancel=()=>{
+    userAPI.removeRequest(id,uid).then().catch((error)=>{
+      console.log(error);
+    })
   }
 
   return (
     <li className="SearchItem">
       <div className="SearchItem__Info">
         <div className="SearchItem__Avatar">
-          <Avatar alt={name} src={urlImage} />
+          <Avatar alt={name} src={picture} />
         </div>
         <div className="SearchItem__Name">
           <h4>{name}</h4>
         </div>
       </div>
       <div className="SearchItem__Btn">
-        {isFriend===false ? (
+        {isFriend===false&&isRequestFriend===false? (
           <Button
             variant="contained"
             onClick={handleClickAddFriend}
@@ -51,7 +63,7 @@ function SearchItem(props) {
           >
             Add Friend
           </Button>
-        ) : (
+        ) : isFriend===true?(
           <Button
             variant="contained"
             onClick={handleClickUnFriend}
@@ -62,7 +74,16 @@ function SearchItem(props) {
           >
             UnFriend
           </Button>
-        )}
+        ):<Button
+          variant="contained"
+          onClick={handleClickCancel}
+          color="primary"
+          className="SearchItem__Btn--unfr"
+          size="small"
+          startIcon={<CancelIcon/>}
+      >
+        Cancel
+      </Button>}
       </div>
     </li>
   );

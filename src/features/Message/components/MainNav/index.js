@@ -3,7 +3,7 @@ import { Badge, Divider, Drawer, IconButton, Tooltip } from "@material-ui/core";
 import logo from "assets/images/iconchat.png";
 import "./style.scss";
 import { useHistory } from "react-router-dom";
-import { useSelector } from "react-redux";
+// import { useSelector } from "react-redux";
 
 function MainNav(props) {
   const { isOpen, isClose, clickSignOut, numberOfFriendRequests, chooseOption } = props;

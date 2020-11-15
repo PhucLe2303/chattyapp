@@ -29,7 +29,7 @@ function LeftSideBar(props) {
   };
   
   const handleClickOutSide = (event) => {
-    if (refSearchInput.current.contains(event.target)) {
+    if (refSearchInput.current && refSearchInput.current.contains(event.target)) {
       setIsSearch(true);
       document.addEventListener("click", handleClickOutSide, false);
       return;

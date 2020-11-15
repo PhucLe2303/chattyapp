@@ -7,6 +7,8 @@ import "./style.scss";
 import Sticker from "./Sticker";
 import fileAPI from "api/fileAPI";
 import Emoji from './Emoji';
+import messageAPI from 'api/messageAPI';
+import { useSelector } from "react-redux";
 
 function FooterMessageBox(props) {
 
@@ -17,9 +19,13 @@ function FooterMessageBox(props) {
   });
   const { handleSubmit } = methods;
   const refChoosePhoto = useRef();
+  const refSubmit = useRef();
+  const currentID = useSelector((state)=>state.user.currentUser.uid);
+  const currentContact = useSelector((state)=>state.message.currentContact);
 
   const onSubmit = (data) => {
     console.log(data);
+    messageAPI.sendMessage(data.message,currentID,currentContact);
   };
 
   const handleClickEmoji=(emoji)=>{
@@ -77,10 +83,11 @@ function FooterMessageBox(props) {
               ),
             }}
           />
+          <button type="submit" ref={refSubmit} style={{display:"none"}}/>
         </form>
       </FormProvider>
       <div className="Footer__SendIcon">
-        <IconButton>
+        <IconButton onClick={()=>refSubmit.current.click()}>
           <span className="fas fa-paper-plane btn-color"></span>
         </IconButton>
       </div>

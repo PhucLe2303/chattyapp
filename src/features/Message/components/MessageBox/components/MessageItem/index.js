@@ -58,9 +58,9 @@ function MessageItem(props) {
   );
 
   return (
-    <div className="MessageItem">
+    <li className="MessageItem">
       {pos === "left" ? leftMessageItem : rightMessageItem}
-    </div>
+    </li>
   );
 }
 
