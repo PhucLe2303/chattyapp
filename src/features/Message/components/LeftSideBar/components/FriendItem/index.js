@@ -18,7 +18,7 @@ FriendItem.defaultProps = {
 
 function FriendItem(props) {
   const currentUid = useSelector((state)=>state.user.currentUser.uid);
-  const {uid, name, urlImage } = props;
+  const {uid, name, picture } = props;
   const dispatch = useDispatch();
 
 
@@ -29,14 +29,18 @@ function FriendItem(props) {
   }
 
   const handleClick=()=>{
-    dispatch(setCurrentContact(uid));
-  }
-  console.log(useSelector((state)=>state.message.currentContact));
+      dispatch(setCurrentContact({
+        uid:uid,
+        name:name,
+        picture:picture,
+      }));
+  };
+  
   return (
     <li className="FriendItem">
       <div className="FriendItem__Info">
         <div className="FriendItem__Avatar" onClick={handleClick}>
-          <Avatar alt={name} src={urlImage}/>
+          <Avatar alt={name} src={picture}/>
         </div>
         <div className="FriendItem__Name">
           <h4 onClick={handleClick}>{name}</h4>

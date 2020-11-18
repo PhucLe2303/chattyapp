@@ -1,31 +1,28 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { formatTime } from "utils/formatTime";
 import ContactItem from "../ContactItem";
 import './style.scss';
 
 function ContactList(props) {
-  const message = "Lê Hữu Phúc đẹp trai vãi cả đái :V";
-  const message2 = "hello";
-  
+
+  const lastMessageByGroupChat = useSelector((state)=>state.message.lastMessageByGroupChat);
+
   return(
   <>
     <ul className="ContactList">
-      <ContactItem name="le huu phuc" sender="you" message={message} date="20/11/2020" isOnline={true}/>
-      <ContactItem name="Huỳnh Quế Trân" sender="Phúc" message={message2} date="23/03/2020"/>
-      <ContactItem/>
-      <ContactItem/>
-      <ContactItem/>
-      <ContactItem/>
-      <ContactItem/>
-      <ContactItem/>
-      <ContactItem/>
-      <ContactItem/>
-      <ContactItem/>
-      <ContactItem/>
-      <ContactItem/>
-      <ContactItem/>
-      <ContactItem/>
-      <ContactItem/>
-      <ContactItem/>
+        {lastMessageByGroupChat.map((value)=>{
+          return <ContactItem 
+                  key={value.groupID}
+                  groupID={value.groupID}
+                  name={value.contactName} 
+                  senderID={value.senderID} 
+                  picture={value.picture} 
+                  message={value.lastMessage} 
+                  date={formatTime(value.timestamp)}
+                  isOnline={false}
+                  />
+        })}
     </ul>
   </>
 

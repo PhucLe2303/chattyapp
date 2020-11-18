@@ -15,10 +15,21 @@
             margin-right: 12px;
         }
     }
-    .ContactBar__Avatar {
+    .ContactBar__Info{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .ContactBar__Avatar {
         margin-left: 12px;
-        width: 60px;
+        margin-right: 10px;
+      }
+      h2{
+        font-size: 15px;
+        font-weight: bold;
+        text-overflow: ellipsis;
+      }
     }
+
     .ContactBar__Menu {
       margin: 0;
       display: flex;

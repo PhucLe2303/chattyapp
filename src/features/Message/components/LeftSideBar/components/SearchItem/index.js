@@ -3,8 +3,9 @@ import PropsType from "prop-types";
 import "./style.scss";
 import { Avatar, Button } from "@material-ui/core";
 import userAPI from 'api/userAPI';
-import {useSelector } from "react-redux";
+import {useDispatch, useSelector } from "react-redux";
 import CancelIcon from '@material-ui/icons/Cancel';
+import { setCurrentContact } from "app/messageSlice";
 
 SearchItem.propsType = {
   picture: PropsType.string,
@@ -19,9 +20,10 @@ SearchItem.defaultProps = {
 };
 
 function SearchItem(props) {
+
   const {uid, name, picture, isFriend, isRequestFriend } = props;
   const id = useSelector((state)=>state.user.currentUser.uid);
-  console.log(isRequestFriend);
+  const dispatch = useDispatch();
 
   const handleClickAddFriend=()=>{
     userAPI.sendFriendRequest(id,uid).catch((error)=>{
@@ -41,14 +43,22 @@ function SearchItem(props) {
     })
   }
 
+  const handleClick=()=>{
+    dispatch(setCurrentContact({
+      uid:uid,
+      name:name,
+      picture:picture,
+    }));
+  }
+
   return (
     <li className="SearchItem">
       <div className="SearchItem__Info">
-        <div className="SearchItem__Avatar">
+        <div className="SearchItem__Avatar" onClick={handleClick}>
           <Avatar alt={name} src={picture} />
         </div>
         <div className="SearchItem__Name">
-          <h4>{name}</h4>
+          <h4 onClick={handleClick}>{name}</h4>
         </div>
       </div>
       <div className="SearchItem__Btn">

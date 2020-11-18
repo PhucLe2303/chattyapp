@@ -4,7 +4,8 @@ import NotificationItem from '../NotificationItem';
 import './style.scss';
 import { useSelector } from 'react-redux';
 import userAPI from 'api/userAPI';
-import Loading from 'components/Loading';
+import emptybackground from 'assets/images/emptyNotification.svg';
+// import Loading from 'components/Loading';
 
 NotificationList.propTypes = {
     
@@ -14,7 +15,6 @@ function NotificationList(props) {
 
     const listFriendRequest = useSelector((state)=>state.message.friendRequests);
     const [listInfo,setListInfo]=useState([]);
-    const [loading,setLoading]=useState(false);
 
     useEffect(()=>{
         let listUser=[];
@@ -37,9 +37,13 @@ function NotificationList(props) {
 
     return (
         <ul className="NotificationList">
-            {listInfo.map((user)=>{
+            {listFriendRequest.length > 0 ? listInfo.map((user)=>{
                 return <NotificationItem key={user.uid} uid={user.uid} name={user.name} picture={user.picture}/>
-            })}
+            }):
+            <div className="EmptyBackground">
+                <h2>Not things to display</h2>
+                <img src={emptybackground} alt="background"/>    
+            </div>}
         </ul>
     );
 }

@@ -8,22 +8,29 @@ import AvatarComponents from "features/Message/components/Avatar";
 import PropsType from "prop-types";
 
 ContactBar.propsType = {
-  urlImage: PropsType.string,
   isOnline: PropsType.bool,
+  contactInfo:PropsType.object,
 };
 
 ContactBar.defaultProp = {
-  urlImage: "",
   isOnline: false,
+  contactInfo:{
+    uid:'',
+    name:'name',
+    picture:'',
+  }
 };
 
 function ContactBar(props) {
-  const { isOnline, urlImage } = props;
+  const { isOnline, contactInfo } = props;
   return (
     <div className="ContactBar">
       <div className="ListBar">
-        <div className="ContactBar__Avatar">
-          <AvatarComponents isOnline={isOnline} urlImage={urlImage} />
+        <div className="ContactBar__Info">
+          <div className="ContactBar__Avatar">
+            <AvatarComponents isOnline={isOnline} picture={contactInfo.picture} />
+          </div>
+          <h2>{contactInfo.name}</h2>
         </div>
         <ul className="ContactBar__Menu">
           <li className="ContactBar__Call">

@@ -12,7 +12,6 @@ function SearchList(props) {
     const [loading,setLoading]= useState(false);
     const listSendRequest = useSelector((state)=>state.message.sendFriendRequests);
     const listFriend=useSelector((state)=>state.message.friendList);
-    // console.log(listSendRequest);
 
     function removeUnicode(str) {
         str = str.replace(/à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ/g, "a");
@@ -54,7 +53,7 @@ function SearchList(props) {
         });
         return ()=>setListUser([]);
     },[searchValue]);
-    
+   
     return (
         <ul className="SearchList">
             {loading?<Loading/>:listUser.map((user)=>{
@@ -62,7 +61,8 @@ function SearchList(props) {
                     return<SearchItem 
                     key={user[0]} 
                     uid={user[0]} 
-                    name={user[1].firstName+" "+user[1].lastName} 
+                    name={user[1].firstName+" "+user[1].lastName}
+                    picture={user[1].picture} 
                     isFriend={false}
                     isRequestFriend={true}
                     />
@@ -72,6 +72,7 @@ function SearchList(props) {
                     key={user[0]} 
                     uid={user[0]} 
                     name={user[1].firstName+" "+user[1].lastName} 
+                    picture={user[1].picture}
                     isFriend={true}
                     isRequestFriend={false}
                     />
@@ -80,6 +81,7 @@ function SearchList(props) {
                 key={user[0]} 
                 uid={user[0]} 
                 name={user[1].firstName+" "+user[1].lastName} 
+                picture={user[1].picture}
                 isFriend={false}
                 isRequestFriend={false}
                 />

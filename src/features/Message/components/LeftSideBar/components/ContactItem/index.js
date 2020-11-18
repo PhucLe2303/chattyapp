@@ -2,11 +2,14 @@ import React from 'react';
 import './style.scss';
 import PropTypes from 'prop-types';
 import AvatarComponents from 'features/Message/components/Avatar';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentContact,setCurrentGroupID } from 'app/messageSlice';
 
 ContactItem.propTypes={
     name:PropTypes.string,
-    urlImage:PropTypes.string,
-    sender:PropTypes.string,
+    picture:PropTypes.string,
+    senderID:PropTypes.string,
+    groupID:PropTypes.string,
     message:PropTypes.string,
     date:PropTypes.string,
     isOnline:PropTypes.bool,
@@ -14,8 +17,9 @@ ContactItem.propTypes={
 
 ContactItem.defaultProps={
     name:'name',
-    urlImage:null,
-    sender:"sender",
+    picture:'',
+    senderID:"sender",
+    groupID:'',
     message:"message",
     date:"06/11/2020",
     isOnline:false,
@@ -23,16 +27,31 @@ ContactItem.defaultProps={
 
 function ContactItem(props) {
 
-    const {name,urlImage,sender,message,date,isOnline}=props;
+    const {name,picture,senderID, groupID ,message,date,isOnline}=props;
+
+    const uid = useSelector((state)=>state.user.currentUser.uid);
+    const dispatch = useDispatch();
+    const arrayID = groupID.split('-',2);
+    const currentContactID = arrayID[0]===uid?arrayID[1]:arrayID[0];
+
+    const handleClickContact=()=>{
+        dispatch(setCurrentContact({
+            uid:currentContactID,
+            name:name,
+            picture:picture,
+        }));
+
+        dispatch(setCurrentGroupID(groupID));
+    }
 
     return (
-        <li className="ContactItem">
+        <li className="ContactItem" onClick={handleClickContact}>
             <div className="ContactItem__Avatar">
-                <AvatarComponents src={urlImage} isOnline={isOnline}/>
+                <AvatarComponents picture={picture} isOnline={isOnline}/>
             </div>
             <div className="ContactItem__Detail">
                 <h4>{name}</h4>
-                <h6>{sender}:{" "}{message}</h6>
+                {uid===senderID?<h6>{'You:'}{" "}{message}</h6>:<h6>{message}</h6>}
             </div>
             <div className="ContactItem__DateStatus">
                 <h6>{date}</h6>

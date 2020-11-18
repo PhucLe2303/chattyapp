@@ -4,12 +4,12 @@ import PropsType from "prop-types";
 
 AvatarComponents.propsType = {
   isOnline: PropsType.bool,
-  urlImage: PropsType.string,
+  picture: PropsType.string,
 };
 
 AvatarComponents.defaultProps = {
   isOnline: false,
-  urlImage: "",
+  picture: "",
 };
 
 const StyledBadge = withStyles((theme) => ({
@@ -21,7 +21,7 @@ const StyledBadge = withStyles((theme) => ({
 }))(Badge);
 
 function AvatarComponents(props) {
-  const { isOnline, urlImage } = props;
+  const { isOnline, picture } = props;
   return (
     <StyledBadge
       overlap="circle"
@@ -33,7 +33,7 @@ function AvatarComponents(props) {
       color="primary"
       invisible={!isOnline}
     >
-      <Avatar src={urlImage} />
+      <Avatar src={picture} />
     </StyledBadge>
   );
 }

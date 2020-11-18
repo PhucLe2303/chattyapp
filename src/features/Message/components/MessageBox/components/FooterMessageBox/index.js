@@ -17,16 +17,23 @@ function FooterMessageBox(props) {
     reValidateMode: "onChange",
     defaultValues: {},
   });
-  const { handleSubmit } = methods;
+  const { handleSubmit,setValue } = methods;
   const refChoosePhoto = useRef();
   const refSubmit = useRef();
   const currentID = useSelector((state)=>state.user.currentUser.uid);
-  const currentContact = useSelector((state)=>state.message.currentContact);
+  const currentContact = useSelector((state)=>state.message.currentContact.uid);
 
   const onSubmit = (data) => {
-    console.log(data);
     messageAPI.sendMessage(data.message,currentID,currentContact);
+    setValue('message','');
   };
+
+  const handleUserKeyPress=(e)=>{
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      refSubmit.current.click();
+    }
+  }
 
   const handleClickEmoji=(emoji)=>{
     console.log(emoji);
@@ -42,7 +49,6 @@ function FooterMessageBox(props) {
 
   const handleChooseFile=(file)=>{
     fileAPI.upLoadFile(file);
-    console.log(file);
   }
 
   return (
@@ -75,6 +81,7 @@ function FooterMessageBox(props) {
             autoComplete="off"
             label=""
             size="small"
+            onKeyPress={handleUserKeyPress}
             InputProps={{
               endAdornment: (
                 <InputAdornment position="end">
@@ -88,7 +95,7 @@ function FooterMessageBox(props) {
       </FormProvider>
       <div className="Footer__SendIcon">
         <IconButton onClick={()=>refSubmit.current.click()}>
-          <span className="fas fa-paper-plane btn-color"></span>
+          <span className="fas fa-paper-plane btn-color"/>
         </IconButton>
       </div>
     </div>
