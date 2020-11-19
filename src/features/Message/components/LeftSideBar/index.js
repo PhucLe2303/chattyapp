@@ -94,7 +94,7 @@ function LeftSideBar(props) {
         {navOption===2?<div>
           <div className="LeftSideBar__Header--Notify">
             <h2>Notification</h2>
-            <h4>List of notification</h4>
+            <h4>List of notifications</h4>
           </div>
           <div className="LeftSideBar__Body--Notify" id="scrollbar">
             <NotificationList />

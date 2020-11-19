@@ -10,7 +10,7 @@ import { useDispatch } from "react-redux";
 import "./style.scss";
 import { setNotification } from "app/notificationSlice";
 import userAPI from "api/userAPI";
-import forgotimg from "assets/images/forgotpass.PNG";
+import forgotimg from "assets/images/forgotpass.svg";
 
 const ForgotPasswordSchema = yup.object().shape({
   email: yup

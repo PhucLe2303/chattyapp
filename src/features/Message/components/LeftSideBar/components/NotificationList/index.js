@@ -41,7 +41,7 @@ function NotificationList(props) {
                 return <NotificationItem key={user.uid} uid={user.uid} name={user.name} picture={user.picture}/>
             }):
             <div className="EmptyBackground">
-                <h2>Not things</h2>
+                <h2>No recent notifications</h2>
                 <img src={emptybackground} alt="background"/>    
             </div>}
         </ul>

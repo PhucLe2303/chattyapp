@@ -70,7 +70,7 @@ function MainNav(props) {
               </Tooltip>
             </li>
             <li>
-              <Tooltip title="Nocification" placement="right-end">
+              <Tooltip title="Notification" placement="right-end">
               <Badge badgeContent={numberOfFriendRequests} color="error">
                 <IconButton className="Btn" onClick={handleClickNotification}>
                   <span className="fas fa-bell icon" />
