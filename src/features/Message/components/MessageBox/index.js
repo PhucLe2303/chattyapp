@@ -11,6 +11,7 @@ function MessageBox(props) {
 
   const currentContact = useSelector((state)=>state.message.currentContact);
   const check = Object.keys(currentContact).length;
+  
 
   return (
     <>

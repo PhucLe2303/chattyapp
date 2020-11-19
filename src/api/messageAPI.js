@@ -2,19 +2,21 @@ import {db} from 'services/firebaseConfig';
 import timeAPI from 'api/timeAPI';
 
 const messageAPI = {
-    sendMessage:(message,fromID, toID)=>{
-        return new Promise(async(resolve,reject)=>{
-            const time = await timeAPI.getCurrentUnixTime();
+    sendMessage:(message,type,fromID, toID)=>{
+        return new Promise((resolve,reject)=>{
+            const time = timeAPI.getCurrentUnixTime();
             const groupiD = fromID > toID ? fromID +'-'+ toID : toID +'-'+ fromID;
 
             db.ref('chats/'+ fromID + '/' + groupiD).set({
                 lastMessage:message,
+                type:type,
                 timestamp: time,
                 sender:fromID,
             });
 
             db.ref('chats/'+ toID + '/' + groupiD).set({
               lastMessage:message,
+              type:type,
               timestamp: time,
               sender:fromID,
             });
@@ -37,8 +39,10 @@ const messageAPI = {
                 }
               });
 
-            db.ref('messages/'+ groupiD + '/' + fromID + '/' + time).set({
+            db.ref('messages/'+ groupiD + '/' + time).set({
                 message:message,
+                type:type,
+                uid:fromID,
                 timestamp:time,
             });
 

@@ -4,7 +4,7 @@ import "./style.scss";
 import { Avatar, Button } from "@material-ui/core";
 import userAPI from "api/userAPI";
 import { useDispatch, useSelector } from "react-redux";
-import {setCurrentContact} from 'app/messageSlice';
+import {setCurrentContact,setCurrentMessage,setCurrentGroupID} from 'app/messageSlice';
 
 FriendItem.propsType = {
   urlImage: PropsType.string,
@@ -18,6 +18,7 @@ FriendItem.defaultProps = {
 
 function FriendItem(props) {
   const currentUid = useSelector((state)=>state.user.currentUser.uid);
+  const currentGroupID = useSelector((state)=>state.message.currentGroupID);
   const {uid, name, picture } = props;
   const dispatch = useDispatch();
 
@@ -34,6 +35,11 @@ function FriendItem(props) {
         name:name,
         picture:picture,
       }));
+      const groupID = uid > currentUid ? uid + '-' + currentUid: currentUid+ '-' + uid;
+      if(currentGroupID!==groupID){
+        dispatch(setCurrentMessage([]));
+        dispatch(setCurrentGroupID(groupID));
+      }
   };
   
   return (

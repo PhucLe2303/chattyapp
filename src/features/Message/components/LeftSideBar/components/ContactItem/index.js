@@ -3,7 +3,7 @@ import './style.scss';
 import PropTypes from 'prop-types';
 import AvatarComponents from 'features/Message/components/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
-import { setCurrentContact,setCurrentGroupID } from 'app/messageSlice';
+import { setCurrentContact,setCurrentGroupID,setCurrentMessage } from 'app/messageSlice';
 
 ContactItem.propTypes={
     name:PropTypes.string,
@@ -30,6 +30,7 @@ function ContactItem(props) {
     const {name,picture,senderID, groupID ,message,date,isOnline}=props;
 
     const uid = useSelector((state)=>state.user.currentUser.uid);
+    const currentGroupID = useSelector((state)=>state.message.currentGroupID);
     const dispatch = useDispatch();
     const arrayID = groupID.split('-',2);
     const currentContactID = arrayID[0]===uid?arrayID[1]:arrayID[0];
@@ -40,8 +41,10 @@ function ContactItem(props) {
             name:name,
             picture:picture,
         }));
-
-        dispatch(setCurrentGroupID(groupID));
+        if(currentGroupID!==groupID){
+            dispatch(setCurrentMessage([]));
+            dispatch(setCurrentGroupID(groupID));
+        }
     }
 
     return (

@@ -2,31 +2,31 @@ import React from "react";
 import PropTypes from "prop-types";
 import "./style.scss";
 import AvatarComponents from "features/Message/components/Avatar";
+import * as constants from 'constants/index';
 
 MessageItem.propTypes = {
   pos: PropTypes.string,
-  urlImage: PropTypes.string,
-  message: PropTypes.string,
+  picture: PropTypes.string,
+  message: PropTypes.any,
   date: PropTypes.string,
   name: PropTypes.string,
 };
 
 MessageItem.defaultProps = {
   pos: "left",
-  urlImage: null,
-  message:
-    "Firebase can help you tackle demanding challenges, whether you’re a developer, marketer, or product manager. Our tools work together so that mobile teams can improve app performance while gaining valuable user insights.Firebase can help you tackle demanding challenges, whether you’re a developer, marketer, or product manager. Our tools work together so that mobile teams can improve app performance while gaining valuable user insights.Firebase can help you tackle demanding challenges, whether you’re a developer, marketer, or product manager. Our tools work together so that mobile teams can improve app performance while gaining valuable user insights.",
+  picture: '',
+  message: "Firebase.",
   date: "18/12/1999   20:15 PM",
   name: "name sender",
 };
 
 function MessageItem(props) {
-  const { pos, urlImage, name, message, date } = props;
+  const { pos, type , picture, name, message, date } = props;
 
   const leftMessageItem = (
     <div className="MessageItem__Container">
       <div className="MessageItem__Avatar">
-      <AvatarComponents isOnline={true} urlImage={urlImage}/>
+        <AvatarComponents isOnline={false} picture={picture}/>
       </div>
       <div className="MessageItem__Content">
         <div className="MessageItem__Detail">
@@ -34,7 +34,7 @@ function MessageItem(props) {
             <p>{name}</p>
           </div>
           <div className="MessageItem__Date">
-          <p>{date}</p>
+            <p>{date}</p>
           </div>
         </div>
         <div className="MessageItem__Msg">
@@ -57,9 +57,109 @@ function MessageItem(props) {
     </div>
   );
 
+  const leftMessageItemPhoto=(
+    <div className="MessageItem__Container">
+      <div className="MessageItem__Avatar">
+        <AvatarComponents isOnline={false} picture={picture}/>
+      </div>
+      <div className="MessageItem__Content">
+        <div className="MessageItem__Detail">
+          <div className="MessageItem__Name">
+            <p>{name}</p>
+          </div>
+          <div className="MessageItem__Date">
+            <p>{date}</p>
+          </div>
+        </div>
+        <div className="MessageItem__Photo">
+          <img src={message} alt=""/>
+        </div>
+      </div>
+    </div>
+  );
+
+  const rightMessageItemPhoto=(
+    <div className="MessageItem__Container--Right">
+    <div className="MessageItem__Content--Right">
+      <div className="MessageItem__Photo--Right">
+        <img src={message} alt=""/>
+      </div>
+      <div className="MessageItem__Detail--Right">
+        <p>{date}</p>
+      </div>
+    </div>
+  </div>
+  );
+
+  const rightMessageItemFile = (
+    <div className="MessageItem__Container--Right">
+      <div className="MessageItem__Content--Right">
+        <div className="MessageItem__File--Right">
+          <p>
+            <span className="fas fa-arrow-circle-down"/>
+            <a 
+            href={message.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            download={message.fileName}
+            >
+              {message.fileName}
+            </a>
+          </p>
+        </div>
+        <div className="MessageItem__Detail--Right">
+          <p>{date}</p>
+        </div>
+      </div>
+    </div>
+  );
+
+  const leftMessageItemFile=(
+    <div className="MessageItem__Container">
+      <div className="MessageItem__Avatar">
+        <AvatarComponents isOnline={false} picture={picture}/>
+      </div>
+      <div className="MessageItem__Content">
+        <div className="MessageItem__Detail">
+          <div className="MessageItem__Name">
+            <p>{name}</p>
+          </div>
+          <div className="MessageItem__Date">
+            <p>{date}</p>
+          </div>
+        </div>
+        <div className="MessageItem__File">
+          <p>
+            <span className="fas fa-arrow-circle-down"/>
+            <a 
+            href={message.url}
+            rel="noopener noreferrer"
+            download={message.fileName}
+            target="_blank"
+            >
+              {message.fileName}
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+
+  const renderMessageItem = ()=>{
+    if(type===constants.TEXT){
+      return pos === "left"? leftMessageItem : rightMessageItem;
+    }
+    if(type===constants.PHOTO){
+      return pos === "left" ? leftMessageItemPhoto : rightMessageItemPhoto;
+    }
+    if(type===constants.FILE){
+      return pos === "left" ? leftMessageItemFile : rightMessageItemFile;
+    }
+  }
+
   return (
     <li className="MessageItem">
-      {pos === "left" ? leftMessageItem : rightMessageItem}
+      {renderMessageItem()}
     </li>
   );
 }

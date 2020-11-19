@@ -5,7 +5,7 @@ import { Avatar, Button } from "@material-ui/core";
 import userAPI from 'api/userAPI';
 import {useDispatch, useSelector } from "react-redux";
 import CancelIcon from '@material-ui/icons/Cancel';
-import { setCurrentContact } from "app/messageSlice";
+import { setCurrentContact, setCurrentGroupID, setCurrentMessage } from "app/messageSlice";
 
 SearchItem.propsType = {
   picture: PropsType.string,
@@ -22,23 +22,24 @@ SearchItem.defaultProps = {
 function SearchItem(props) {
 
   const {uid, name, picture, isFriend, isRequestFriend } = props;
-  const id = useSelector((state)=>state.user.currentUser.uid);
+  const currentUid = useSelector((state)=>state.user.currentUser.uid);
+  const currentGroupID = useSelector((state)=>state.message.currentGroupID);
   const dispatch = useDispatch();
 
   const handleClickAddFriend=()=>{
-    userAPI.sendFriendRequest(id,uid).catch((error)=>{
+    userAPI.sendFriendRequest(currentUid,uid).catch((error)=>{
       console.log(error);
     })
   }
 
   const handleClickUnFriend=()=>{
-    userAPI.removeFriend(id,uid).then().catch((error)=>{
+    userAPI.removeFriend(currentUid,uid).then().catch((error)=>{
       console.log(error);
     })
   }
 
   const handleClickCancel=()=>{
-    userAPI.removeRequest(id,uid).then().catch((error)=>{
+    userAPI.removeRequest(currentUid,uid).then().catch((error)=>{
       console.log(error);
     })
   }
@@ -49,6 +50,11 @@ function SearchItem(props) {
       name:name,
       picture:picture,
     }));
+    const groupID = uid > currentUid ? uid + '-' + currentUid: currentUid+ '-' + uid;
+    if(currentGroupID!==groupID){
+      dispatch(setCurrentMessage([]));
+      dispatch(setCurrentGroupID(groupID));
+    }
   }
 
   return (

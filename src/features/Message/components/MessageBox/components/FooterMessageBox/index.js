@@ -9,6 +9,7 @@ import fileAPI from "api/fileAPI";
 import Emoji from './Emoji';
 import messageAPI from 'api/messageAPI';
 import { useSelector } from "react-redux";
+import * as constants from 'constants/index';
 
 function FooterMessageBox(props) {
 
@@ -24,7 +25,7 @@ function FooterMessageBox(props) {
   const currentContact = useSelector((state)=>state.message.currentContact.uid);
 
   const onSubmit = (data) => {
-    messageAPI.sendMessage(data.message,currentID,currentContact);
+    messageAPI.sendMessage(data.message,constants.TEXT,currentID,currentContact);
     setValue('message','');
   };
 
@@ -36,7 +37,6 @@ function FooterMessageBox(props) {
   }
 
   const handleClickEmoji=(emoji)=>{
-    console.log(emoji);
     let value = methods.getValues('message');
     value = value + emoji.native;
     methods.setValue('message',value);
@@ -44,11 +44,17 @@ function FooterMessageBox(props) {
 
   const handleChoosePhoto=(event)=>{
     const fileUploaded = event.target.files[0];
-    fileAPI.upLoadPhoto(fileUploaded);
+    const groupID = currentContact>currentID?currentContact+'-'+currentID:currentID+'-'+currentContact;
+    fileAPI.upLoadPhoto(fileUploaded,groupID).then((url)=>{
+      messageAPI.sendMessage(url,constants.PHOTO,currentID,currentContact);
+    });
   }
 
   const handleChooseFile=(file)=>{
-    fileAPI.upLoadFile(file);
+    const groupID = currentContact>currentID?currentContact+'-'+currentID:currentID+'-'+currentContact;
+    fileAPI.upLoadFile(file,groupID).then((url)=>{
+      messageAPI.sendMessage(url,constants.FILE,currentID,currentContact);
+    })
   }
 
   return (

@@ -25,7 +25,7 @@
         }
         .MessageItem__Content{
             padding-left: 10px;
-            width: 70%;
+            max-width: 70%;
             .MessageItem__Detail{
                 display: flex;
                 align-items: center;
@@ -45,16 +45,46 @@
                 }
             }
             .MessageItem__Msg{
+                width: fit-content;
+                max-width: 100%;
                 border-radius: 30px;
                 min-height: 20px;
                 padding: 12px 20px;
                 background-color: #f1f0f0;
+                color: #223645;
                 font-weight: 600;
-                font-size: 15px;
+                font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1920 - 320)));
                 border-top-left-radius: 0;
                 p{
                     margin: 0;
                     overflow-wrap: break-word;
+                }
+            }
+
+            .MessageItem__Photo{
+                width: fit-content;
+                max-width: 100%;
+                img{
+                    height: 280px;
+                    width: 400px;
+                    border-radius: 15px;
+                }
+            }
+
+            .MessageItem__File{
+
+                @extend .MessageItem__Msg;
+
+                p{
+                    overflow-wrap: break-word;
+                    span{
+                        margin-right: 5px;
+                        color: rgb(192, 193, 195);
+                    }
+                    a{
+                        text-decoration: none;
+                        color: black;
+                    }
                 }
             }
 
@@ -72,6 +102,7 @@
         margin-right: 25px;
         .MessageItem__Content--Right{
             max-width: 70%;
+            align-self: flex-end;
             display: flex;
             flex-direction: column;
             .MessageItem__Detail--Right{
@@ -83,17 +114,43 @@
     
             }
             .MessageItem__Msg--Right{
+                align-self: flex-end;
+                max-width: 100%;
                 border-radius: 30px;
                 min-height: 20px;
                 padding: 12px 20px;
                 background-color:rgb(0, 153, 255);
                 font-weight: 600;
-                font-size: 15px;
+                font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1920 - 320)));
                 border-bottom-right-radius: 0;
                 p{
                     margin: 0;
                     overflow-wrap: break-word;
                     color: #fff;
+                }
+            }
+
+            .MessageItem__Photo--Right{
+                align-self: flex-end;
+               img{
+                    height: 280px;
+                    width: 400px;
+                    border-radius: 15px;
+               }
+            }
+
+            .MessageItem__File--Right{
+                @extend .MessageItem__Msg--Right;
+                cursor: pointer;
+                p{
+                    overflow-wrap: break-word;
+                    span{
+                        margin-right: 5px;
+                    }
+                    a{
+                        text-decoration: none;
+                        color: #fff;
+                    }
                 }
             }
         }

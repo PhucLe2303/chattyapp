@@ -8,7 +8,7 @@ const initialState = {
   groupChat: [],
   lastMessageByGroupChat: [],
   currentGroupID: "",
-  currentMessage:{},
+  currentMessage:[],
 };
 
 const messageSlice = createSlice({

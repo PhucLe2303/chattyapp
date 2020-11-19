@@ -11,6 +11,7 @@ import { useDispatch } from "react-redux";
 import {setCurrentUser} from 'app/userSlice';
 import {setNotification} from 'app/notificationSlice';
 import userAPI from "api/userAPI";
+import * as constants from 'constants/index';
 
 const SignInSchema = yup.object().shape({
   email: yup
@@ -31,12 +32,6 @@ function SignIn() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
-  const [didMount,setDidMount] = useState(false);
-
-  useEffect(()=>{
-    setDidMount(true);
-    return ()=> setDidMount(false);
-  },[])
 
 
   const onSubmit = (data) => {
@@ -47,7 +42,7 @@ function SignIn() {
       }));
       dispatch(setNotification({
         type:"success",
-        message:"Sign in is Success",
+        message:constants.SIGNIN_SUCCSES,
       }));
       setLoading(false);
       history.push('/');
@@ -67,7 +62,7 @@ function SignIn() {
       }));
       dispatch(setNotification({
         type:"success",
-        message:"Sign in is Success",
+        message:constants.SIGNIN_SUCCSES,
       }));
       history.push('/');
     }).catch((err)=>{
@@ -87,7 +82,7 @@ function SignIn() {
       }));
       dispatch(setNotification({
         type:"success",
-        message:"Sign in is Success",
+        message:constants.SIGNIN_SUCCSES,
       }));
       history.push('/');
     }).catch((err)=>{

@@ -16,6 +16,7 @@ import MainNav from "features/Message/components/MainNav";
 import MessageBox from "features/Message/components/MessageBox";
 import "./style.scss";
 import LeftSideBar from "features/Message/components/LeftSideBar";
+import * as constants from 'constants/index';
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -73,9 +74,12 @@ const MainPage = () => {
           const dataChild = data[groupID];
           if (senderID !== uid) {
             const info = await userAPI.getUserInfor(senderID);
+            const text1 = info.firstName + " " + info.lastName + ' ' + 'send a photo';
+            const text2 = info.firstName + " " + info.lastName + ' ' + 'send a file';
+            const lastMessage = dataChild.type === constants.TEXT ? dataChild.lastMessage:dataChild.type===constants.PHOTO?text1:text2;
             list.push({
               groupID: groupID,
-              lastMessage: dataChild.lastMessage,
+              lastMessage: lastMessage,
               contactName: info.firstName + " " + info.lastName,
               senderID: senderID,
               picture: info.picture,
@@ -85,9 +89,12 @@ const MainPage = () => {
             const idArr = groupID.split("-", 2);
             const contactID = idArr[0] !== uid ? idArr[0] : idArr[1];
             const info = await userAPI.getUserInfor(contactID);
+            const text1 ='Send a photo';
+            const text2 ='Send a file';
+            const lastMessage = dataChild.type === constants.TEXT ? dataChild.lastMessage:dataChild.type===constants.PHOTO?text1:text2;
             list.push({
               groupID: groupID,
-              lastMessage: dataChild.lastMessage,
+              lastMessage: lastMessage,
               contactName: info.firstName + " " + info.lastName,
               senderID: senderID,
               picture: info.picture,
@@ -126,7 +133,7 @@ const MainPage = () => {
   return (
     <>
       <Grid container wrap="nowrap" direction="row" className="Main">
-        <Grid item sx="true" className="MainNav">
+        <Grid item className="MainNav">
           <MainNav
             isOpen={openNav}
             isClose={handleOpenNav}
@@ -135,7 +142,7 @@ const MainPage = () => {
             chooseOption={handlechooseNavOption}
           />
         </Grid>
-        <Grid item xs={false} className="Main__LeftSideBar">
+        <Grid item className="Main__LeftSideBar">
           <div className="Main__Container">
             <LeftSideBar
               clickOpenNavBtn={handleOpenNav}
@@ -144,7 +151,7 @@ const MainPage = () => {
             />
           </div>
         </Grid>
-        <Grid item xs={false} className="Main__MessageBox">
+        <Grid item className="Main__MessageBox">
           <MessageBox />
         </Grid>
       </Grid>

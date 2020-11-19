@@ -141,15 +141,19 @@ const userAPI = {
                 picture : picture,
                 email: email,
                 token: token,
-              })
-            }).catch((error)=>{
-              console.log(error);
-            })
+              });
+            });
         })
         .catch(function (error) {
           // Handle Errors here.
           var errorMessage = error.message;
           // The email of the user's account used.
+          if(error.code ==='auth/popup-closed-by-user'){
+            reject({
+              type:"error",
+              message:'You have closed the pop-up, please login'
+            });
+          }
           reject({
             type: "error",
             message: errorMessage,

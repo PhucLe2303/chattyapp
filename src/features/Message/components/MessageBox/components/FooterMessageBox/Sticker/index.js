@@ -85,6 +85,7 @@ export default function Sticker(props) {
       setLoading(true);
       StickerAPI.getMeep()
         .then((data) => {
+          console.log(data);
           setMeep(data);
           setLoading(false);
         })
@@ -109,6 +110,7 @@ export default function Sticker(props) {
     };
   },[value]);
 
+
   const handleClickQooBee = () => {
     return qooBee.map((url) => {
       return (
@@ -124,6 +126,7 @@ export default function Sticker(props) {
   };
 
   const handleClickMeep = () => {
+    if(meep.length===0) return; 
     return meep.map((url) => {
       return (
         <GridListTile cols={1} key={url.url}>
@@ -239,10 +242,19 @@ export default function Sticker(props) {
               cols={4}
               style={{ maxWidth: "432px", height: "400px" }}
             >
-              {/* {loading ? (
+              {loading ? (
                 <Loading />
-              ) : handleClickMeep()} */}
-              {handleClickMeep()}
+              ) : meep.map((url) => (
+            
+                  <GridListTile cols={1} key={url.url}>
+                    <img
+                      style={{ width: "40px", height: "40px" }}
+                      src={url.url}
+                      alt="ticker"
+                    />
+                  </GridListTile>
+             
+  ))}
             </GridList>
           </div>
         </TabPanel>
