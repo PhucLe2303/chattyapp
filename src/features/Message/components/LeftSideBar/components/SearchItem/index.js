@@ -6,6 +6,7 @@ import userAPI from 'api/userAPI';
 import {useDispatch, useSelector } from "react-redux";
 import CancelIcon from '@material-ui/icons/Cancel';
 import { setCurrentContact, setCurrentGroupID, setCurrentMessage } from "app/messageSlice";
+import {setDisplayConversation} from 'app/userSlice';
 
 SearchItem.propsType = {
   picture: PropsType.string,
@@ -51,6 +52,7 @@ function SearchItem(props) {
       picture:picture,
     }));
     const groupID = uid > currentUid ? uid + '-' + currentUid: currentUid+ '-' + uid;
+    dispatch(setDisplayConversation(true));
     if(currentGroupID!==groupID){
       dispatch(setCurrentMessage([]));
       dispatch(setCurrentGroupID(groupID));

@@ -5,6 +5,7 @@ import { Avatar, Button } from "@material-ui/core";
 import userAPI from "api/userAPI";
 import { useDispatch, useSelector } from "react-redux";
 import {setCurrentContact,setCurrentMessage,setCurrentGroupID} from 'app/messageSlice';
+import {setDisplayConversation} from 'app/userSlice';
 
 FriendItem.propsType = {
   urlImage: PropsType.string,
@@ -36,6 +37,7 @@ function FriendItem(props) {
         picture:picture,
       }));
       const groupID = uid > currentUid ? uid + '-' + currentUid: currentUid+ '-' + uid;
+      dispatch(setDisplayConversation(true));
       if(currentGroupID!==groupID){
         dispatch(setCurrentMessage([]));
         dispatch(setCurrentGroupID(groupID));

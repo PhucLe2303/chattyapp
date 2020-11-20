@@ -5,6 +5,7 @@ import { Avatar, Button } from "@material-ui/core";
 import userAPI from 'api/userAPI';
 import { useDispatch, useSelector } from "react-redux";
 import {setCurrentContact, setCurrentGroupID, setCurrentMessage} from 'app/messageSlice';
+import {setDisplayConversation} from 'app/userSlice';
 
 NotificationItem.propsType = {
   urlImage: PropsType.string,
@@ -32,6 +33,7 @@ function NotificationItem(props) {
   const handleClick=()=>{
     dispatch(setCurrentContact(uid));
     const groupID = uid > currentUid ? uid + '-' + currentUid: currentUid+ '-' + uid;
+    dispatch(setDisplayConversation(true));
     if(currentGroupID!==groupID){
       dispatch(setCurrentMessage([]));
       dispatch(setCurrentGroupID(groupID));
