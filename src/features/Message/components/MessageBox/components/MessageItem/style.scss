@@ -158,3 +158,30 @@
         }
     }
 }
+
+@media screen and (max-width: 600px){
+    .MessageItem{
+
+        .MessageItem__Container{
+            .MessageItem__Content{
+                .MessageItem__Photo{
+                    img{
+                        height: 250px;
+                        width: 300px;
+                    }
+                }
+            }
+        }
+
+        .MessageItem__Container--Right{
+            .MessageItem__Content--Right{
+                .MessageItem__Photo--Right{
+                    img{
+                        height: 250px;
+                        width: 300px;
+                    }
+                }
+            }
+        }
+    }
+}

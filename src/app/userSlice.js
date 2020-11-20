@@ -11,6 +11,7 @@ const initialState={
         token:'',
         email:'',
     },
+    displayConversation:false,
 }
 
 const cookies = new Cookies();
@@ -28,10 +29,13 @@ const userSlice = createSlice({
             state.currentUser=initialState.currentUser;
             localStorage.removeItem('uid');
             cookies.remove('token');
+        },
+        setDisplayConversation:(state,action)=>{
+            state.displayConversation=action.payload;
         }
     }
 });
 
 const {reducer,actions} = userSlice;
-export const {setCurrentUser,removeCurrentUser} = actions;
+export const {setCurrentUser,removeCurrentUser,setDisplayConversation} = actions;
 export default reducer;

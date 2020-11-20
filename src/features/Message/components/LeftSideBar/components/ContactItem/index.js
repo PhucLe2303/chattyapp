@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import AvatarComponents from 'features/Message/components/Avatar';
 import { useDispatch, useSelector } from 'react-redux';
 import { setCurrentContact,setCurrentGroupID,setCurrentMessage } from 'app/messageSlice';
+import {setDisplayConversation} from 'app/userSlice';
 
 ContactItem.propTypes={
     name:PropTypes.string,
@@ -41,6 +42,7 @@ function ContactItem(props) {
             name:name,
             picture:picture,
         }));
+        dispatch(setDisplayConversation(true));
         if(currentGroupID!==groupID){
             dispatch(setCurrentMessage([]));
             dispatch(setCurrentGroupID(groupID));

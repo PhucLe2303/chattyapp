@@ -19,6 +19,12 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      .backArrow{
+        margin-left: 12px;
+        color: white;
+        cursor: pointer;
+        display: none;
+      }
       .ContactBar__Avatar {
         margin-left: 12px;
         margin-right: 10px;
@@ -41,6 +47,18 @@
       }
       .ContactBar__Info {
        
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px){
+  .ContactBar{
+    .ListBar{
+      .ContactBar__Info{
+        .backArrow{
+          display: inline-block;
+        }
       }
     }
   }

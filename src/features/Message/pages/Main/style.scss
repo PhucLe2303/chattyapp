@@ -4,7 +4,7 @@
     .Main__LeftSideBar{
 
         .Main__Container{
-            min-width: 300px;
+            width: 300px;
         }
     }
 
@@ -14,3 +14,22 @@
     }
 }
 
+@media screen and (max-width: 600px) {
+
+    .Main{
+        height: 100%;
+        overflow: hidden;
+        display: inline-block !important;
+
+        .Main__LeftSideBar{
+            overflow: hidden;
+            .Main__Container{
+               width: 100%;
+            }
+        }
+
+        .Main__MessageBox{
+            width: 100%;
+        }
+    }
+}

@@ -1,4 +1,4 @@
-import { Grid } from "@material-ui/core";
+import { Grid, useMediaQuery } from "@material-ui/core";
 import React, { useEffect, useState } from "react";
 import userAPI from "api/userAPI";
 import messageAPI from "api/messageAPI";
@@ -25,6 +25,9 @@ const MainPage = () => {
   const uid = useSelector((state) => state.user.currentUser.uid);
   const [numberOfFriendRequests, setNumberOfFriendRequests] = useState(0);
   const [navOption, setnavOption] = useState(0);
+  const checksize = useMediaQuery('(max-width:600px)');
+  const displayConversation = useSelector((state)=>state.user.displayConversation);
+  console.log(checksize);
 
   useEffect(() => {
     userAPI.receiveFriendRequestListener(uid, (snapshot) => {
@@ -146,17 +149,24 @@ const MainPage = () => {
           />
         </Grid>
         <Grid item className="Main__LeftSideBar">
-          <div className="Main__Container">
+          {checksize===false?<div className="Main__Container">
             <LeftSideBar
               clickOpenNavBtn={handleOpenNav}
               numberOfFriendRequests={numberOfFriendRequests}
               navOption={navOption}
             />
-          </div>
+          </div>:displayConversation===false?<div className="Main__Container">
+          <LeftSideBar
+              clickOpenNavBtn={handleOpenNav}
+              numberOfFriendRequests={numberOfFriendRequests}
+              navOption={navOption}
+          /></div>:null}
         </Grid>
-        <Grid item className="Main__MessageBox">
+        {checksize===false?<Grid item className="Main__MessageBox" zeroMinWidth={true}>
           <MessageBox />
-        </Grid>
+        </Grid>:displayConversation===true?<Grid item className="Main__MessageBox" zeroMinWidth={true}>
+          <MessageBox />
+        </Grid>:null}
       </Grid>
     </>
   );
