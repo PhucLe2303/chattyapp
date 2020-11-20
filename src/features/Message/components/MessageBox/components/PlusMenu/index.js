@@ -7,6 +7,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import MenuList from "@material-ui/core/MenuList";
 import { Tooltip } from "@material-ui/core";
 import GifIcon from "@material-ui/icons/Gif";
+import './style.scss';
 
 export default function PlusMenu(props) {
   const { clickAttachFile } = props;
@@ -47,7 +48,7 @@ export default function PlusMenu(props) {
   }, [open]);
 
   return (
-    <div className="RootClass">
+    <div className="PlusMenu">
       <div>
         <div
           ref={anchorRef}
@@ -56,7 +57,7 @@ export default function PlusMenu(props) {
           onClick={handleToggle}
         >
           <Tooltip title="More option">
-            <span className="fas fa-plus-circle btn-color" />
+            <span className="fas fa-plus-circle btn-color icon" />
           </Tooltip>
         </div>
         <Popper

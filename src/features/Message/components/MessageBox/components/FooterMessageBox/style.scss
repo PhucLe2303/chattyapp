@@ -20,8 +20,36 @@
         flex: 1 1 auto;
             .MuiOutlinedInput-root{
                 border-radius: 30px ;
-                // min-height: 45px;
-             }
+            }
     }
     
+}
+
+@media screen and (max-width: 600px){
+
+    .FooterBox__Container{
+
+        .Footer__SelectIcon{
+
+        }
+
+        .Form{
+            .inputClass{
+                font-size: 20px;
+                ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                    font-size: 14px;
+                }
+            }
+        }
+
+        .icon{
+            font-size: 20px;
+        }
+
+        .Footer__SendIcon{
+            .icon{
+                font-size: 20px;
+            }
+        }
+    }
 }

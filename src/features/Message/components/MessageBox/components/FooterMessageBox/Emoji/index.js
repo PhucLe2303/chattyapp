@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "emoji-mart/css/emoji-mart.css";
 import { Picker } from "emoji-mart";
 import { Popover, Tooltip } from "@material-ui/core";
+import './style.scss';
 
 function Emoji(props) {
 
@@ -24,11 +25,10 @@ function Emoji(props) {
   };
 
   return (
-    <div>
+    <div className="Emoji">
       <Tooltip title="Choose emoji">
         <span
-          className="fas fa-smile btn-color"
-          style={{ fontSize: "1.5rem", cursor: "pointer" }}
+          className="fas fa-smile btn-color icon"
           onClick={handleClickOpenEmoji}
         />
       </Tooltip>

@@ -15,9 +15,9 @@ const StickerAPI = {
             res.items.forEach((itemRef,index)=>{
               itemRef.getDownloadURL().then((url)=>{
                 list.push({url:url});
+                if(index-res.items.length<0)
+                  resolve(list);
               });
-              if(index-res.items.length<0)
-               resolve(list);
             })
         })
         .catch(function (error) {
@@ -41,9 +41,8 @@ const StickerAPI = {
           res.items.forEach((itemRef,index)=>{
             itemRef.getDownloadURL().then((url)=>{
               list.push({url:url});
+              if (index + 1 === res.items.length) resolve(list);
             });
-            if(index-res.items.length<0)
-             resolve(list);
           })
         })
         .catch(function (error) {
@@ -66,10 +65,9 @@ const StickerAPI = {
             res.items.forEach((itemRef,index)=>{
               itemRef.getDownloadURL().then((url)=>{
                 list.push({url:url});
+                if (index + 1 === res.items.length) resolve(list);
               });
-              if(index-res.items.length<0)
-               resolve(list);
-            })
+            });
         })
         .catch(function (error) {
             reject(error);

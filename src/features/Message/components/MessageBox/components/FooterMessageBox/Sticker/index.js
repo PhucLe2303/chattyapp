@@ -68,7 +68,6 @@ export default function Sticker(props) {
 
   useEffect(() => {
     if (qooBee.length===0&&value === 0){
-      console.log('vao 0');
       setLoading(true);
       StickerAPI.getQooBee()
       .then((data) => {
@@ -81,11 +80,9 @@ export default function Sticker(props) {
       });
     };
     if (meep.length===0&&value === 1){
-      console.log('vao 1');
       setLoading(true);
       StickerAPI.getMeep()
         .then((data) => {
-          console.log(data);
           setMeep(data);
           setLoading(false);
         })
@@ -96,7 +93,6 @@ export default function Sticker(props) {
 
     };
     if (speedy.length===0&&value === 2) {
-      console.log('vao 2');
       setLoading(true);
       StickerAPI.getSpeedy()
         .then((data) => {
@@ -116,7 +112,7 @@ export default function Sticker(props) {
       return (
         <GridListTile cols={1} key={url.url}>
           <img
-            style={{ width: "40px", height: "40px" }}
+            style={{ width: "30px", height: "30px" }}
             src={url.url}
             alt="ticker"
           />
@@ -131,7 +127,7 @@ export default function Sticker(props) {
       return (
         <GridListTile cols={1} key={url.url}>
           <img
-            style={{ width: "40px", height: "40px" }}
+            style={{ width: "30px", height: "30px" }}
             src={url.url}
             alt="ticker"
           />
@@ -145,7 +141,7 @@ export default function Sticker(props) {
       return (
         <GridListTile cols={1} key={url.url}>
           <img
-            style={{ width: "40px", height: "40px" }}
+            style={{ width: "30px", height: "30px" }}
             src={url.url}
             alt="ticker"
           />
@@ -171,7 +167,7 @@ export default function Sticker(props) {
     <div className={classes.root}>
        <IconButton onClick={handleClick}>
         <Tooltip title="Choose sticker">
-          <span className="fas fa-sticky-note btn-color" />
+          <span className="fas fa-sticky-note icon btn-color" />
         </Tooltip>
       </IconButton>
       <Popover
@@ -244,17 +240,7 @@ export default function Sticker(props) {
             >
               {loading ? (
                 <Loading />
-              ) : meep.map((url) => (
-            
-                  <GridListTile cols={1} key={url.url}>
-                    <img
-                      style={{ width: "40px", height: "40px" }}
-                      src={url.url}
-                      alt="ticker"
-                    />
-                  </GridListTile>
-             
-  ))}
+              ) : handleClickMeep()}
             </GridList>
           </div>
         </TabPanel>
@@ -264,10 +250,9 @@ export default function Sticker(props) {
             cols={4}
             style={{ maxWidth: "432px", height: "400px" }}
           >
-            {/* {loading ? (
+            {loading ? (
               <Loading />
-            ) :handleClickSpeedy()} */}
-            {handleClickSpeedy()}
+            ) :handleClickSpeedy()}
           </GridList>
         </TabPanel>
       </Popover>

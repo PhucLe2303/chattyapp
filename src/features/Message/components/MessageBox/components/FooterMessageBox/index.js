@@ -67,7 +67,7 @@ function FooterMessageBox(props) {
         <Sticker/>
         <IconButton onClick={()=>refChoosePhoto.current.click()}>
           <Tooltip title="Choose your image">
-          <span className="fas fa-image btn-color"/>
+            <span className="fas fa-image icon btn-color"/>
           </Tooltip>
           <input
             ref={refChoosePhoto}
@@ -82,8 +82,9 @@ function FooterMessageBox(props) {
         <form onSubmit={handleSubmit(onSubmit)} className="Form">
           <InputField
             name="message"
+            className="inputClass"
             multiline
-            placeholder="Type your message..."
+            placeholder="Aa..."
             margin="none"
             autoComplete="off"
             label=""
@@ -102,7 +103,7 @@ function FooterMessageBox(props) {
       </FormProvider>
       <div className="Footer__SendIcon">
         <IconButton onClick={()=>refSubmit.current.click()}>
-          <span className="fas fa-paper-plane btn-color"/>
+          <span className="fas fa-paper-plane icon icon-btn btn-color"/>
         </IconButton>
       </div>
     </div>
