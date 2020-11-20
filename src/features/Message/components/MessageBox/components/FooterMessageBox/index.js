@@ -23,9 +23,12 @@ function FooterMessageBox(props) {
   const refSubmit = useRef();
   const currentID = useSelector((state)=>state.user.currentUser.uid);
   const currentContact = useSelector((state)=>state.message.currentContact.uid);
+  const groupID = currentContact>currentID?currentContact+'-'+currentID:currentID+'-'+currentContact;
 
   const onSubmit = (data) => {
-    messageAPI.sendMessage(data.message,constants.TEXT,currentID,currentContact);
+    let message = data.message.trim();
+    if(message!=='')
+      messageAPI.sendMessage(message,constants.TEXT,currentID,currentContact);
     setValue('message','');
   };
 
@@ -44,14 +47,12 @@ function FooterMessageBox(props) {
 
   const handleChoosePhoto=(event)=>{
     const fileUploaded = event.target.files[0];
-    const groupID = currentContact>currentID?currentContact+'-'+currentID:currentID+'-'+currentContact;
     fileAPI.upLoadPhoto(fileUploaded,groupID).then((url)=>{
       messageAPI.sendMessage(url,constants.PHOTO,currentID,currentContact);
     });
   }
 
   const handleChooseFile=(file)=>{
-    const groupID = currentContact>currentID?currentContact+'-'+currentID:currentID+'-'+currentContact;
     fileAPI.upLoadFile(file,groupID).then((url)=>{
       messageAPI.sendMessage(url,constants.FILE,currentID,currentContact);
     })

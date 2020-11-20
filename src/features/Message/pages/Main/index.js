@@ -102,6 +102,9 @@ const MainPage = () => {
             });
           }
           if (index === dataKey.length - 1) {
+            list.sort((a,b)=>{
+              return b.timestamp-a.timestamp;
+            });
             dispatch(setLastMessageByGroupChat(list));
           }
       });
