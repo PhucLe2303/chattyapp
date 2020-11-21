@@ -6,6 +6,8 @@ import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Box from "@material-ui/core/Box";
 import StickerAPI from "api/stickerAPI";
+import messageAPI from 'api/messageAPI';
+import * as constants from 'constants/index';
 import {
   GridList,
   GridListTile,
@@ -14,6 +16,8 @@ import {
   Tooltip,
 } from "@material-ui/core";
 import Loading from "components/Loading";
+import { useSelector } from "react-redux";
+import './style.scss';
 
 const qooBeeTitle =
   "https://firebasestorage.googleapis.com/v0/b/chatty-app-8b7f5.appspot.com/o/Sticker%2FQooBee%2Ftitle%2FqoobeeTitle.png?alt=media&token=2aef8e57-48c4-40b0-b243-f3ad1f896229";
@@ -53,6 +57,7 @@ function a11yProps(index) {
 const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: theme.palette.background.paper,
+    overflow:'hidden',
   },
 }));
 
@@ -65,6 +70,8 @@ export default function Sticker(props) {
   const [speedy, setSpeedy] = useState([]);
   const [loading, setLoading] = useState(false);
   const [anchorEl, setAnchorEl] = useState(null);
+  const currentID = useSelector((state)=>state.user.currentUser.uid);
+  const currentContact = useSelector((state)=>state.message.currentContact.uid);
 
   useEffect(() => {
     if (qooBee.length===0&&value === 0){
@@ -107,12 +114,18 @@ export default function Sticker(props) {
   },[value]);
 
 
+  const handleClickSticker=(url)=>{
+    console.log(url);
+    messageAPI.sendMessage(url,constants.STICKER,currentID,currentContact);
+  }
+
   const handleClickQooBee = () => {
     return qooBee.map((url) => {
       return (
-        <GridListTile cols={1} key={url.url}>
+        <GridListTile cols={1} key={url.url} button onClick={()=>handleClickSticker(url.url)} className="titleA">
           <img
-            style={{ width: "30px", height: "30px" }}
+            style={{ width: "34px", height: "34px"}}
+            className="stickerItem"
             src={url.url}
             alt="ticker"
           />
@@ -125,9 +138,10 @@ export default function Sticker(props) {
     if(meep.length===0) return; 
     return meep.map((url) => {
       return (
-        <GridListTile cols={1} key={url.url}>
+        <GridListTile cols={1} key={url.url} button onClick={()=>handleClickSticker(url.url)} className="titleA">
           <img
-            style={{ width: "30px", height: "30px" }}
+            style={{ width: "34px", height: "34px" }}
+            className="stickerItem"
             src={url.url}
             alt="ticker"
           />
@@ -139,9 +153,10 @@ export default function Sticker(props) {
   const handleClickSpeedy = () => {
     return speedy.map((url) => {
       return (
-        <GridListTile cols={1} key={url.url}>
+        <GridListTile cols={1} key={url.url} button onClick={()=>handleClickSticker(url.url)} className="titleA">
           <img
-            style={{ width: "30px", height: "30px" }}
+            style={{ width: "34px", height: "34px" }}
+            className="stickerItem"
             src={url.url}
             alt="ticker"
           />
@@ -221,39 +236,40 @@ export default function Sticker(props) {
           </Tabs>
         </AppBar>
         <TabPanel value={value} index={0} dir={theme.direction}>
+          <div style={{maxHeight:"340px",maxWidth:"394px",overflowY:"scroll",overflowX:"hidden"}}>
           <GridList
-            cellHeight={80}
+            cellHeight={70}
             cols={4}
-            style={{ maxWidth: "432px", height: "400px" }}
           >
             {loading ? (
-              <Loading />
+              <div style={{height:"340px",width:"394px"}}><Loading /></div>
             ) : handleClickQooBee()}
           </GridList>
+          </div>
         </TabPanel>
         <TabPanel value={value} index={1} dir={theme.direction}>
-          <div className="content" style={{ width: "432px", height: "400px" }}>
-            <GridList
-              cellHeight={80}
+          <div  style={{maxHeight:"340px",maxWidth:"394px",overflowY:"scroll",overflowX:"hidden"}}>
+          <GridList
+              cellHeight={70}
               cols={4}
-              style={{ maxWidth: "432px", height: "400px" }}
             >
               {loading ? (
-                <Loading />
+                <div style={{height:"340px",width:"394px"}}><Loading /></div>
               ) : handleClickMeep()}
             </GridList>
           </div>
         </TabPanel>
         <TabPanel value={value} index={2} dir={theme.direction}>
+          <div style={{maxHeight:"340px",maxWidth:"394px",overflowY:"scroll",overflowX:"hidden"}}>
           <GridList
-            cellHeight={80}
+            cellHeight={70}
             cols={4}
-            style={{ maxWidth: "432px", height: "400px" }}
           >
             {loading ? (
-              <Loading />
+              <div style={{height:"340px",width:"394px"}}><Loading /></div>
             ) :handleClickSpeedy()}
           </GridList>
+          </div>
         </TabPanel>
       </Popover>
     </div>

@@ -82,7 +82,7 @@ function MainNav(props) {
         </div>
         <div className="Toolbar__Footer">
           <ul className="Toolbar__ListFooter">
-            <li>
+            {/* <li>
               <Tooltip title="Setting" placement="right-end">
                 <IconButton className="Btn">
                   <span className="fas fa-cog Btn--Setting icon" />
@@ -95,7 +95,7 @@ function MainNav(props) {
                   <span className="fas fa-moon icon" />
                 </IconButton>
               </Tooltip>
-            </li>
+            </li> */}
             <li>
               <Tooltip title="Sign out" placement="right-end">
                 <IconButton 

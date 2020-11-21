@@ -78,10 +78,45 @@ function MessageItem(props) {
     </div>
   );
 
+
   const rightMessageItemPhoto=(
     <div className="MessageItem__Container--Right">
     <div className="MessageItem__Content--Right">
       <div className="MessageItem__Photo--Right">
+        <img src={message} alt=""/>
+      </div>
+      <div className="MessageItem__Detail--Right">
+        <p>{date}</p>
+      </div>
+    </div>
+  </div>
+  );
+
+  const leftMessageItemSticker=(
+    <div className="MessageItem__Container">
+      <div className="MessageItem__Avatar">
+        <AvatarComponents isOnline={false} picture={picture}/>
+      </div>
+      <div className="MessageItem__Content">
+        <div className="MessageItem__Detail">
+          <div className="MessageItem__Name">
+            <p>{name}</p>
+          </div>
+          <div className="MessageItem__Date">
+            <p>{date}</p>
+          </div>
+        </div>
+        <div className="MessageItem__Sticker">
+          <img src={message} alt=""/>
+        </div>
+      </div>
+    </div>
+  );
+
+  const rightMessageItemSticker=(
+    <div className="MessageItem__Container--Right">
+    <div className="MessageItem__Content--Right">
+      <div className="MessageItem__Sticker--Right">
         <img src={message} alt=""/>
       </div>
       <div className="MessageItem__Detail--Right">
@@ -154,6 +189,9 @@ function MessageItem(props) {
     }
     if(type===constants.FILE){
       return pos === "left" ? leftMessageItemFile : rightMessageItemFile;
+    }
+    if(type===constants.STICKER){
+      return pos ==="left" ? leftMessageItemSticker: rightMessageItemSticker;
     }
   }
 

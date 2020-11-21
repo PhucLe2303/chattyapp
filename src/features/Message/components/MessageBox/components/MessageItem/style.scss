@@ -71,6 +71,14 @@
                 }
             }
 
+            .MessageItem__Sticker{
+                img{
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 15px;
+                }
+            }
+
             .MessageItem__File{
 
                 @extend .MessageItem__Msg;
@@ -137,6 +145,14 @@
                     width: 400px;
                     border-radius: 15px;
                }
+            }
+
+            .MessageItem__Sticker--Right{
+                align-self: flex-end;
+                img{
+                    width: 50px;
+                    height: 50px;
+                }
             }
 
             .MessageItem__File--Right{

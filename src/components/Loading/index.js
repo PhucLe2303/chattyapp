@@ -1,6 +1,7 @@
 import { CircularProgress } from "@material-ui/core";
 import React from "react";
 import PropTypes from "prop-types";
+import './style.scss';
 
 Loading.propType = {
   size: PropTypes.string,
@@ -12,10 +13,11 @@ Loading.defaultProps = {
   color: "primary",
 };
 
+// style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100%",height:"100vh"}}
 function Loading(props) {
   const { size, color, ...other } = props;
   return(
-        <div style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100%",height:"100vh"}}>
+        <div className="Loading">
              <CircularProgress size={size} color={color} {...other} style={{color:"#1C9DEA"}}/>
         </div>
   )

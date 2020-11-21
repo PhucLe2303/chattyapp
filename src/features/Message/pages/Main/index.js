@@ -79,7 +79,9 @@ const MainPage = () => {
             const info = await userAPI.getUserInfor(senderID);
             const text1 = info.firstName + " " + info.lastName + ' ' + 'send a photo';
             const text2 = info.firstName + " " + info.lastName + ' ' + 'send a file';
-            const lastMessage = dataChild.type === constants.TEXT ? dataChild.lastMessage:dataChild.type===constants.PHOTO?text1:text2;
+            const text3 = info.firstName + " " + info.lastName + ' ' + 'send a sticker';
+            const lastMessage = dataChild.type === constants.TEXT ? dataChild.lastMessage:
+            dataChild.type===constants.PHOTO?text1:dataChild.type===constants.FILE?text2:text3;
             list.push({
               groupID: groupID,
               lastMessage: lastMessage,
@@ -94,7 +96,9 @@ const MainPage = () => {
             const info = await userAPI.getUserInfor(contactID);
             const text1 ='Send a photo';
             const text2 ='Send a file';
-            const lastMessage = dataChild.type === constants.TEXT ? dataChild.lastMessage:dataChild.type===constants.PHOTO?text1:text2;
+            const text3 = 'Send a sticker';
+            const lastMessage = dataChild.type === constants.TEXT ? dataChild.lastMessage:
+            dataChild.type===constants.PHOTO?text1:dataChild.type===constants.FILE?text2:text3;
             list.push({
               groupID: groupID,
               lastMessage: lastMessage,
