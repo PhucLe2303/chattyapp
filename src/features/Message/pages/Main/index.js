@@ -27,7 +27,6 @@ const MainPage = () => {
   const [navOption, setnavOption] = useState(0);
   const checksize = useMediaQuery('(max-width:600px)');
   const displayConversation = useSelector((state)=>state.user.displayConversation);
-  console.log(checksize);
 
   useEffect(() => {
     userAPI.receiveFriendRequestListener(uid, (snapshot) => {
@@ -65,7 +64,7 @@ const MainPage = () => {
     });
 
     messageAPI.receiveLastMessageListener(uid,(snapShot)=>{
-      if(!snapShot.val()){
+      if(!snapShot.val()||uid===''){
         setLastMessageByGroupChat([]);
         return;
       }
@@ -75,21 +74,23 @@ const MainPage = () => {
       dataKey.forEach(async(groupID, index) => {
           const senderID = data[groupID].sender;
           const dataChild = data[groupID];
+          console.log(dataKey);
+          console.log(dataChild);
           if (senderID !== uid) {
             const info = await userAPI.getUserInfor(senderID);
             const text1 = info.firstName + " " + info.lastName + ' ' + 'send a photo';
             const text2 = info.firstName + " " + info.lastName + ' ' + 'send a file';
             const text3 = info.firstName + " " + info.lastName + ' ' + 'send a sticker';
             const lastMessage = dataChild.type === constants.TEXT ? dataChild.lastMessage:
-            dataChild.type===constants.PHOTO?text1:dataChild.type===constants.FILE?text2:text3;
-            list.push({
+            dataChild.type===constants.PHOTO?text1:dataChild.type===constants.STICKER?text3:text2;
+            list.push(Object.assign({},{
               groupID: groupID,
               lastMessage: lastMessage,
               contactName: info.firstName + " " + info.lastName,
               senderID: senderID,
               picture: info.picture,
               timestamp: dataChild.timestamp,
-            });
+            }));
           } else {
             const idArr = groupID.split("-", 2);
             const contactID = idArr[0] !== uid ? idArr[0] : idArr[1];
@@ -98,15 +99,15 @@ const MainPage = () => {
             const text2 ='Send a file';
             const text3 = 'Send a sticker';
             const lastMessage = dataChild.type === constants.TEXT ? dataChild.lastMessage:
-            dataChild.type===constants.PHOTO?text1:dataChild.type===constants.FILE?text2:text3;
-            list.push({
+            dataChild.type===constants.PHOTO?text1:dataChild.type===constants.STICKER?text3:text2;
+            list.push(Object.assign({},{
               groupID: groupID,
               lastMessage: lastMessage,
               contactName: info.firstName + " " + info.lastName,
               senderID: senderID,
               picture: info.picture,
               timestamp: dataChild.timestamp,
-            });
+            }));
           }
           if (index === dataKey.length - 1) {
             list.sort((a,b)=>{

@@ -63,10 +63,10 @@
 
             .MessageItem__Photo{
                 width: fit-content;
-                max-width: 100%;
+                width: 100%;
                 img{
-                    height: 280px;
-                    width: 400px;
+                    max-height: 280px;
+                    max-width: 400px;
                     border-radius: 15px;
                 }
             }
@@ -141,8 +141,8 @@
             .MessageItem__Photo--Right{
                 align-self: flex-end;
                img{
-                    height: 280px;
-                    width: 400px;
+                    max-height: 280px;
+                    max-width: 400px;
                     border-radius: 15px;
                }
             }
@@ -180,8 +180,8 @@
             .MessageItem__Content{
                 .MessageItem__Photo{
                     img{
-                        height: 250px;
-                        width: 300px;
+                        max-height: 240px;
+                        max-width: 280px;
                     }
                 }
             }
@@ -191,8 +191,8 @@
             .MessageItem__Content--Right{
                 .MessageItem__Photo--Right{
                     img{
-                        height: 250px;
-                        width: 300px;
+                        max-height: 240px;
+                        max-width: 280px;
                     }
                 }
             }

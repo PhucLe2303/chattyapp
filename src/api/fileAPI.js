@@ -26,7 +26,6 @@ const fileAPI={
             const storageRef = storage.ref('chats/');
             const name = photo.name;
             const imagesRef = storageRef.child('photos/'+ groupID +'/'+name);
-            console.log(groupID);
             imagesRef.put(photo).then((snapShot)=>{
                 snapShot.ref.getDownloadURL().then((url)=>{
                     resolve(url);

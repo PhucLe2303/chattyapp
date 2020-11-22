@@ -13,7 +13,6 @@ Loading.defaultProps = {
   color: "primary",
 };
 
-// style={{display:"flex",justifyContent:"center",alignItems:"center",width:"100%",height:"100vh"}}
 function Loading(props) {
   const { size, color, ...other } = props;
   return(

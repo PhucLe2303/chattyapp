@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useForm, FormProvider } from "react-hook-form";
 import { Button, IconButton, CircularProgress } from "@material-ui/core";
 import "./SignIn.scss";

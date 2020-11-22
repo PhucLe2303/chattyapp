@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "./style.scss";
 import AvatarComponents from "features/Message/components/Avatar";
 import * as constants from 'constants/index';
+import DisplayPhoto from './components/DisplayPhoto';
 
 MessageItem.propTypes = {
   pos: PropTypes.string,
@@ -72,7 +73,7 @@ function MessageItem(props) {
           </div>
         </div>
         <div className="MessageItem__Photo">
-          <img src={message} alt=""/>
+          <DisplayPhoto url={message}/>
         </div>
       </div>
     </div>
@@ -83,7 +84,7 @@ function MessageItem(props) {
     <div className="MessageItem__Container--Right">
     <div className="MessageItem__Content--Right">
       <div className="MessageItem__Photo--Right">
-        <img src={message} alt=""/>
+        <DisplayPhoto url={message}/>
       </div>
       <div className="MessageItem__Detail--Right">
         <p>{date}</p>

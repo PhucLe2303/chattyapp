@@ -20,22 +20,20 @@ function App() {
 
   const dispatch = useDispatch();
   const [isLoading,setIsLoading]=useState(false);
-  const history = useHistory();
 
   useEffect(()=>{
-    setIsLoading(true);
     userAPI.verifyCurrentUser().then((user)=>{
+      setIsLoading(true);
       if(user.token){
         userAPI.getUserInfor(user.uid).then((userInfo)=>{
           dispatch(setCurrentUser({
             ...userInfo,
             token:user.token,
-          }))
+          }));
           setIsLoading(false);
-        })
+        });
       }else{
         setIsLoading(false);
-        history.push('/signin');
       }
     }).catch((error)=>{
       console.log(error);
@@ -45,9 +43,9 @@ function App() {
   
   return (
     <div className="App">
-      {isLoading?<Loading/>:
+      {isLoading===true?<Loading/>:
       <Router>
-        <Suspense fallback={<div><Loading/></div>}>
+        <Suspense fallback={<Loading/>}>
           <Switch>
             <PrivateRoute exact path="/" component={MainPage}></PrivateRoute>
             <Route exact path="/signin" component={SignIn} />

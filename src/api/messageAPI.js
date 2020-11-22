@@ -61,6 +61,8 @@ const messageAPI = {
     },
 
     receiveLastMessageListener:(uid,handleFunc)=>{
+      if(uid==='')
+        return;
       return db.ref('chats/'+ uid).on('value',handleFunc);
     },
 

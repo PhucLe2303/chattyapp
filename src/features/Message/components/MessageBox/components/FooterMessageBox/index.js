@@ -85,7 +85,7 @@ function FooterMessageBox(props) {
             className="inputClass"
             multiline
             placeholder="Aa..."
-            autoFocus=''
+            autoFocus={true}
             margin="none"
             autoComplete="off"
             label=""
