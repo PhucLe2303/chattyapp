@@ -1,3 +1,5 @@
+@import url('../../../../../../theme/index.scss');
+
 $backGround-item-hover:rgba(0, 132, 255, .2);
 
 .NotificationItem{
@@ -30,6 +32,7 @@ $backGround-item-hover:rgba(0, 132, 255, .2);
                 font-weight: 500;
                 overflow: hidden;
                 max-width: 150px;
+                color: var(--color-text);
                 cursor: pointer;
                 &:hover{
                     text-decoration: underline;

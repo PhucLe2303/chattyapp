@@ -7,7 +7,7 @@ import NotFound from 'components/NotFound';
 import Loading from 'components/Loading';
 import { useDispatch } from "react-redux";
 import userAPI from 'api/userAPI';
-import {setCurrentUser} from 'app/userSlice';
+import {setCurrentUser,setDarkMode} from 'app/userSlice';
 
 const SignIn = lazy(() => import("./features/Auth/pages/SignIn"));
 const SignUp = lazy(() => import("./features/Auth/pages/SignUp"));
@@ -22,6 +22,14 @@ function App() {
   const [isLoading,setIsLoading]=useState(false);
 
   useEffect(()=>{
+
+    const themeName = localStorage.getItem("theme");
+    if (themeName === "dark") {
+      dispatch(setDarkMode(true));
+    } else {
+      dispatch(setDarkMode(false));
+    }
+
     userAPI.verifyCurrentUser().then((user)=>{
       setIsLoading(true);
       if(user.token){

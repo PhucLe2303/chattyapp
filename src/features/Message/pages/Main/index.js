@@ -29,6 +29,7 @@ const MainPage = () => {
   const displayConversation = useSelector((state)=>state.user.displayConversation);
 
   useEffect(() => {
+
     userAPI.receiveFriendRequestListener(uid, (snapshot) => {
       if (!snapshot.val()) {
         setNumberOfFriendRequests(0);
@@ -74,8 +75,8 @@ const MainPage = () => {
       dataKey.forEach(async(groupID, index) => {
           const senderID = data[groupID].sender;
           const dataChild = data[groupID];
-          console.log(dataKey);
-          console.log(dataChild);
+          // console.log(dataKey);
+          // console.log(dataChild);
           if (senderID !== uid) {
             const info = await userAPI.getUserInfor(senderID);
             const text1 = info.firstName + " " + info.lastName + ' ' + 'send a photo';

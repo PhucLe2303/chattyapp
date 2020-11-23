@@ -1,5 +1,8 @@
+@import url('../../../../../../theme/index.scss');
+
+
 .Text-Style{
-    color: #647589;
+    color: var(--color-text-message);
     font-size: 11px;
     font-weight: 400;
 }
@@ -35,7 +38,7 @@
                     font-family: "Montserrat",sans-serif;
                     font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1920 - 320)));
                     font-weight: 700;
-                    color: #223645;
+                    color: var(--color-text-message-name);
                 }
 
                 .MessageItem__Date{
@@ -50,8 +53,8 @@
                 border-radius: 30px;
                 min-height: 20px;
                 padding: 12px 20px;
-                background-color: #f1f0f0;
-                color: #223645;
+                background-color: var(--color-background-message-item);
+                color: var(--color-text-message);
                 font-weight: 600;
                 font-size: calc(13px + (14 - 13) * ((100vw - 320px) / (1920 - 320)));
                 border-top-left-radius: 0;

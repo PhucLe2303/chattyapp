@@ -56,7 +56,6 @@ function a11yProps(index) {
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    backgroundColor: theme.palette.background.paper,
     overflow:'hidden',
   },
 }));
@@ -115,7 +114,6 @@ export default function Sticker(props) {
 
 
   const handleClickSticker=(url)=>{
-    console.log(url);
     messageAPI.sendMessage(url,constants.STICKER,currentID,currentContact);
   }
 

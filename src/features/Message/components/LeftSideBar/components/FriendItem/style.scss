@@ -1,3 +1,5 @@
+@import url('../../../../../../theme/index.scss');
+
 $backGround-item-hover: rgba(0, 132, 255, 0.2);
 
 .FriendItem {
@@ -30,6 +32,7 @@ $backGround-item-hover: rgba(0, 132, 255, 0.2);
           font-weight: 500;
           overflow: hidden;
           max-width: 120px;
+          color: var(--color-text);
           cursor: pointer;
           &:hover{
             text-decoration: underline;

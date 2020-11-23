@@ -12,6 +12,7 @@ const initialState={
         email:'',
     },
     displayConversation:false,
+    darkMode:false,
 }
 
 const cookies = new Cookies();
@@ -32,10 +33,17 @@ const userSlice = createSlice({
         },
         setDisplayConversation:(state,action)=>{
             state.displayConversation=action.payload;
+        },
+        setDarkMode:(state,action)=>{
+            state.darkMode=action.payload;
+            if(action.payload===true)
+                localStorage.setItem('theme','dark');
+            else
+                localStorage.setItem('theme','light');
         }
     }
 });
 
 const {reducer,actions} = userSlice;
-export const {setCurrentUser,removeCurrentUser,setDisplayConversation} = actions;
+export const {setCurrentUser,removeCurrentUser,setDisplayConversation,setDarkMode} = actions;
 export default reducer;

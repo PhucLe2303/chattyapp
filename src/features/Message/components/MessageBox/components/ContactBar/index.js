@@ -46,21 +46,21 @@ function ContactBar(props) {
           <li className="ContactBar__Call">
             <IconButton>
               <Tooltip title="Call">
-                <CallIcon />
+                <CallIcon className="iconContactbar"/>
               </Tooltip>
             </IconButton>
           </li>
           <li className="ContactBar__VideoCall">
             <IconButton>
               <Tooltip title="Chat video">
-                <VideoCallIcon />
+                <VideoCallIcon className="iconContactbar"/>
               </Tooltip>
             </IconButton>
           </li>
           <li className="ContactBar__Info">
             <IconButton>
               <Tooltip title="More infor">
-                <InfoIcon />
+                <InfoIcon className="iconContactbar"/>
               </Tooltip>
             </IconButton>
           </li>

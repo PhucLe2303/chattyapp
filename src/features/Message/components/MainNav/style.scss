@@ -1,3 +1,14 @@
+.theme-light {
+    --color-background: #ffffff;
+    --color-icon-button: rgba(0, 0, 0, 0.54);;
+ }
+.theme-dark {
+    --color-background: #191b1f;
+    --color-icon-button: honeydew;
+}
+
+
+
 .Btn--hover{
     background-color: #4a92d1;
     color: honeydew;
@@ -13,6 +24,7 @@
     height: 100%;
     min-width: 100px;
     text-align: center;
+    background-color: var(--color-background);
     
     .Toolbar__Content{
         display: flex;
@@ -31,6 +43,10 @@
                 li{
                     padding-bottom: 30px;
                 }
+                .Btn{
+                    color: var(--color-icon-button);
+                }
+
                 .Btn:hover{
                     @extend .Btn--hover;
                 }
@@ -45,6 +61,10 @@
                 flex-direction: column;
                 justify-content: space-between;
                 align-self: flex-end;
+
+                .Btn{
+                    color: var(--color-icon-button);
+                }
 
                 .Btn:hover{
                     @extend .Btn--hover;
@@ -61,6 +81,11 @@
     }
     
    
+}
+
+.Toolbar--dark{
+    @extend .Toolbar;
+    background-color: #191b1f;
 }
 
 @keyframes rotation {

@@ -1,3 +1,5 @@
+@import url('../../../../theme/index.scss');
+
 .MessageBox{
     display: flex;
     flex-direction: column;
@@ -6,16 +8,21 @@
     height: 100vh;
     .MessageBox__Header{
         .MessageBox__ContacBar{
-
+          
         }
 
     }
     .MessageBox__Body{
-        padding-top: 5px;
-        overflow-y: auto;
-        overflow-x: hidden;
-        height: calc(100% - 112px);
-        max-height: calc(100% - 112px);
+      background-color: var(--color-background--message);
+      padding-top: 5px;
+      overflow-y: auto;
+      overflow-x: hidden;
+      height: calc(100% - 112px);
+      max-height: calc(100% - 112px);
+    }
+
+    .MessageBox__Footer{
+      background-color: var(--color-background);
     }
 }
 

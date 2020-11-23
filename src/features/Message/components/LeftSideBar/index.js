@@ -63,7 +63,7 @@ function LeftSideBar(props) {
           <div className="LeftSideBar__ShowNav_btn">
             <IconButton onClick={handleClickShowNavButton} className="Btn">
               <Badge color="error" variant="dot" invisible={invisible}>
-                <span className="fas fa-grip-vertical" />
+                <span className="fas fa-grip-vertical icon-button" />
               </Badge>
             </IconButton>
           </div>
@@ -77,7 +77,7 @@ function LeftSideBar(props) {
                 placeholder="Search in Chatty"
                 inputProps={{ "aria-label": "Search in Chatty" }}
                 className="LeftSideBar__Input"
-                startAdornment={<SearchIcon />}
+                startAdornment={<SearchIcon className="SearchIcon"/>}
               />
             </div>
           </div>

@@ -1,8 +1,12 @@
-$color-text:rgba(153, 153, 153, 1);
+@import url('../../../../../../theme/index.scss');
+
+// $color-text:rgba(153, 153, 153, 1);
 $backGround-item-hover:rgba(0, 132, 255, .2);
 
+
+
 .Text{
-    color: $color-text;
+    color: var(--color-text-contact);
     font-size: 13px;
     font-weight: 400;
 }
@@ -29,6 +33,7 @@ $backGround-item-hover:rgba(0, 132, 255, .2);
             white-space: nowrap;
             overflow: hidden;
             max-width: 165px;
+            color: var(--color-text);
         }
         h4{
             margin-bottom: 2px;
@@ -36,7 +41,9 @@ $backGround-item-hover:rgba(0, 132, 255, .2);
             font-weight: 500;
         }
         h6{
-            @extend .Text;
+            font-size: 13px;
+            font-weight: 400;
+            color: var(--color-text-last-message);
         }
 
     }
