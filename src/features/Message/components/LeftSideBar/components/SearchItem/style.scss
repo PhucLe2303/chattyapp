@@ -1,3 +1,4 @@
+@import url('../../../../../../theme/index.scss');
 $backGround-item-hover:rgba(0, 132, 255, .2);
 
 .SearchItem{
@@ -26,6 +27,7 @@ $backGround-item-hover:rgba(0, 132, 255, .2);
                 font-weight: 500;
                 overflow: hidden;
                 max-width: 100px;
+                color: var(--color-text);
 
                 &:hover{
                     cursor: pointer;

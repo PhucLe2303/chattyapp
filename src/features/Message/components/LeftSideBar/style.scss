@@ -45,6 +45,15 @@
         padding-left: 10px;
         padding-right: 16px;
         text-align: left;
+
+        ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+          font-size: 14px;
+          color:var(--color-text);
+        }
+
+        .MuiInputBase-inputAdornedStart{
+          color:var(--color-text);
+        }
       }
 
       .SearchIcon{
