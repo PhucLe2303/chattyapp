@@ -45,6 +45,9 @@
     .Form {
       display: flex;
       flex-direction: column;
+      .Input {
+        margin-bottom: 15px;
+      }
       .BackHome {
         .LinkResetPassword {
           color: #7289da;
@@ -64,9 +67,14 @@
         background-color: #1c9dea;
         text-transform: none;
 
-        .Circular{
+        .Circular {
           color: white;
         }
+      }
+
+      #g-recaptcha {
+        transform: scale(0.77);
+        transform-origin: 0 0;
       }
     }
   }
@@ -79,8 +87,7 @@
 }
 
 @media screen and (max-width: 1024px) {
-
-  .Container{
+  .Container {
     .Header--left {
       img {
         width: 100%;

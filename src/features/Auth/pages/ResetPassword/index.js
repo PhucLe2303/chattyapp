@@ -11,6 +11,7 @@ import "./style.scss";
 import { setNotification } from "app/notificationSlice";
 import userAPI from "api/userAPI";
 import forgotimg from "assets/images/forgotpass.svg";
+import { ReCaptcha } from "react-recaptcha-google";
 
 const ForgotPasswordSchema = yup.object().shape({
   email: yup
@@ -30,16 +31,34 @@ function ForgotPassword() {
   const dispatch = useDispatch();
   const history = useHistory();
   const [loading, setLoading] = useState(false);
+  const [tokenReCaptcha, setTokenReCaptcha] = useState();
+
+  const onLoadRecaptcha = () => {};
+
+  const verifyCallback = (recaptchaToken) => {
+    // Here you will get the final recaptchaToken!!!
+    setTokenReCaptcha(recaptchaToken);
+  };
 
   const onSubmit = (data) => {
+    if (!tokenReCaptcha) {
+      dispatch(
+        setNotification({ type: "error", message: "Captcha not found!" })
+      );
+      return;
+    }
     setLoading(true);
-    userAPI.resetPassword(data.email).then(()=>{
-      setLoading(false);
-      history.push('/signin');
-    }).catch((err)=>{
-      dispatch(setNotification(err));
-      setLoading(false);
-    })
+    userAPI
+      .resetPassword(data.email)
+      .then(() => {
+        setLoading(false);
+        history.push("/signin");
+      })
+      .catch((err) => {
+        dispatch(setNotification(err));
+        setLoading(false);
+      });
+    setTokenReCaptcha("");
   };
   return (
     <>
@@ -60,6 +79,14 @@ function ForgotPassword() {
             <FormProvider {...methods}>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <InputField name="email" label="Email" className="Input" />
+                <ReCaptcha
+                  size="normal"
+                  data-theme="light"
+                  render="explicit"
+                  sitekey={process.env.REACT_APP_RE_CAPTCHA_KEY}
+                  onloadCallback={onLoadRecaptcha}
+                  verifyCallback={verifyCallback}
+                />
                 <Button
                   variant="contained"
                   color="primary"
@@ -67,7 +94,6 @@ function ForgotPassword() {
                   className="ResetPassword__btn"
                   type="submit"
                   fullWidth
-                  onClick={() => setLoading(true)}
                 >
                   {loading ? (
                     <CircularProgress size={25.75} className="Circular" />

@@ -8,6 +8,7 @@ import Loading from 'components/Loading';
 import { useDispatch } from "react-redux";
 import userAPI from 'api/userAPI';
 import {setCurrentUser,setDarkMode} from 'app/userSlice';
+import { loadReCaptcha } from 'react-recaptcha-google'
 
 const SignIn = lazy(() => import("./features/Auth/pages/SignIn"));
 const SignUp = lazy(() => import("./features/Auth/pages/SignUp"));
@@ -22,7 +23,7 @@ function App() {
   const [isLoading,setIsLoading]=useState(false);
 
   useEffect(()=>{
-
+    loadReCaptcha();
     const themeName = localStorage.getItem("theme");
     if (themeName === "dark") {
       dispatch(setDarkMode(true));
