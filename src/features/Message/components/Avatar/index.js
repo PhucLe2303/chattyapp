@@ -24,7 +24,7 @@ function AvatarComponents(props) {
   const { isOnline, picture } = props;
   return (
     <StyledBadge
-      overlap="circle"
+      overlap="circular"
       anchorOrigin={{
         vertical: "bottom",
         horizontal: "right",
