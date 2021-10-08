@@ -20,6 +20,8 @@ const ForgotPasswordSchema = yup.object().shape({
     .required("Email is required."),
 });
 
+let instanceReCaptcha = null;
+
 function ForgotPassword() {
   const methods = useForm({
     mode: "onTouched",
@@ -33,7 +35,11 @@ function ForgotPassword() {
   const [loading, setLoading] = useState(false);
   const [tokenReCaptcha, setTokenReCaptcha] = useState();
 
-  const onLoadRecaptcha = () => {};
+  const onLoadRecaptcha = () => {
+    if (instanceReCaptcha) {
+      instanceReCaptcha.reset();
+    }
+  };
 
   const verifyCallback = (recaptchaToken) => {
     // Here you will get the final recaptchaToken!!!
@@ -53,16 +59,23 @@ function ForgotPassword() {
       .then(() => {
         setLoading(false);
         history.push("/signin");
+        dispatch(
+          setNotification({
+            type: "success",
+            message: "Password reset email has been sent!",
+          })
+        );
       })
       .catch((err) => {
         dispatch(setNotification(err));
         setLoading(false);
       });
     setTokenReCaptcha("");
+    if (instanceReCaptcha) instanceReCaptcha.reset();
   };
   return (
     <>
-      <Grid container className="Container" justify="space-evenly">
+      <Grid container className="Container" justifyContent="space-evenly">
         <Grid item xs={7} className="Header--left">
           <img src={forgotimg} alt="forgot img" />
         </Grid>
@@ -80,6 +93,9 @@ function ForgotPassword() {
               <form onSubmit={handleSubmit(onSubmit)}>
                 <InputField name="email" label="Email" className="Input" />
                 <ReCaptcha
+                  ref={(el) => {
+                    instanceReCaptcha = el;
+                  }}
                   size="normal"
                   data-theme="light"
                   render="explicit"
